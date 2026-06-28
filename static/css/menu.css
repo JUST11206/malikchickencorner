@@ -1,0 +1,305 @@
+/* ==========================
+   MENU PAGE
+========================== */
+
+.menu-page{
+    background:#111;
+    min-height:100vh;
+    padding-bottom:80px;
+}
+
+/* ==========================
+   HEADER
+========================== */
+
+.menu-header{
+    text-align:center;
+    padding:40px 0;
+}
+
+.menu-header h1{
+    color:#fff;
+    font-size:48px;
+    font-weight:700;
+}
+
+.menu-header p{
+    color:#aaa;
+    margin-top:10px;
+}
+
+/* ==========================
+   FILTER
+========================== */
+
+.menu-filter{
+    margin-bottom:50px;
+}
+
+.menu-input,
+.menu-select{
+    height:55px;
+    background:#1e1e1e;
+    color:#fff;
+    border:1px solid #333;
+    border-radius:12px;
+}
+
+.menu-input:focus,
+.menu-select:focus{
+    background:#1e1e1e;
+    color:#fff;
+    border-color:#dc3545;
+    box-shadow:none;
+}
+
+.menu-search-btn{
+    height:55px;
+    border-radius:12px;
+}
+
+/* ==========================
+   SECTION TITLE
+========================== */
+
+.section-title{
+    text-align:center;
+    margin-bottom:45px;
+}
+
+.section-title h2{
+    color:#fff;
+    font-weight:700;
+}
+
+.section-title p{
+    color:#aaa;
+}
+
+/* ==========================
+   PRODUCT CARD
+========================== */
+
+.product-card{
+    background:#1b1b1b;
+    border-radius:18px;
+    overflow:hidden;
+    position:relative;
+    transition:.3s;
+    height:100%;
+    border:1px solid #2d2d2d;
+}
+
+.product-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 15px 35px rgba(0,0,0,.4);
+}
+
+/* Image */
+
+.product-image{
+    height:230px;
+    overflow:hidden;
+}
+
+.product-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:.4s;
+}
+
+.product-card:hover img{
+    transform:scale(1.08);
+}
+
+/* Offer Badge */
+
+.offer-badge{
+    position:absolute;
+    top:15px;
+    left:15px;
+    background:#dc3545;
+    color:#fff;
+    padding:5px 12px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:600;
+    z-index:10;
+}
+
+/* Wishlist */
+
+.wishlist-btn{
+    position:absolute;
+    top:15px;
+    right:15px;
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    background:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#dc3545;
+    z-index:10;
+    transition:.3s;
+}
+
+.wishlist-btn:hover{
+    background:#dc3545;
+    color:#fff;
+}
+
+/* Body */
+
+.product-body{
+    padding:20px;
+}
+
+.category-badge{
+    display:inline-block;
+    background:#dc3545;
+    color:#fff;
+    padding:5px 12px;
+    border-radius:20px;
+    font-size:12px;
+    margin-bottom:12px;
+}
+
+.product-body h4{
+    color:#fff;
+    font-size:22px;
+    margin-bottom:10px;
+}
+
+.product-body p{
+    color:#bbb;
+    min-height:45px;
+}
+
+/* Rating */
+
+.rating{
+    color:#ffc107;
+    margin:10px 0;
+}
+
+/* Price */
+
+.price-box{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin:15px 0;
+}
+
+.price{
+    color:#dc3545;
+    font-size:26px;
+    font-weight:700;
+}
+
+.old-price{
+    color:#888;
+    text-decoration:line-through;
+}
+
+/* Buttons */
+
+.product-buttons{
+    display:flex;
+    gap:10px;
+}
+
+.product-buttons .btn{
+    flex:1;
+    border-radius:10px;
+}
+
+/* ==========================
+   NO PRODUCT
+========================== */
+
+.no-products{
+    text-align:center;
+    padding:80px 0;
+    color:#fff;
+}
+
+.no-products p{
+    color:#aaa;
+}
+
+/* ==========================
+   PAGINATION
+========================== */
+
+.pagination{
+    margin-top:50px;
+}
+
+.pagination .page-link{
+    background:#1c1c1c;
+    color:#fff;
+    border:1px solid #333;
+}
+
+.pagination .page-link:hover{
+    background:#dc3545;
+    border-color:#dc3545;
+    color:#fff;
+}
+
+.pagination .active .page-link{
+    background:#dc3545;
+    border-color:#dc3545;
+}
+
+/* ==========================
+   RESPONSIVE
+========================== */
+
+@media(max-width:768px){
+
+    .menu-header h1{
+        font-size:34px;
+    }
+
+    .product-buttons{
+        flex-direction:column;
+    }
+
+}
+.product-link{
+    text-decoration:none;
+    color:inherit;
+    display:block;
+}
+
+.product-link:hover{
+    color:inherit;
+}
+
+.product-buttons button{
+    pointer-events:none;
+}
+.product-card{
+    cursor:pointer;
+    transition:.3s ease;
+}
+
+.product-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 12px 30px rgba(0,0,0,.15);
+}
+
+.product-buttons a{
+    z-index:10;
+    position:relative;
+}
+
+.wishlist-btn{
+    z-index:10;
+    position:absolute;
+}

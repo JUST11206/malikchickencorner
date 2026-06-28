@@ -1,0 +1,208 @@
+/* ==========================================
+   ADMIN ORDER DETAILS
+========================================== */
+
+/* Banner */
+
+.order-banner{
+    background:linear-gradient(135deg,#212529,#343a40);
+    color:#fff;
+    text-align:center;
+    padding:60px 20px;
+    margin-top:90px;   /* Fixed navbar spacing */
+    margin-bottom:40px;
+}
+
+.order-banner h1{
+    font-size:38px;
+    font-weight:700;
+    margin-bottom:10px;
+}
+
+.order-banner p{
+    color:#d6d6d6;
+    font-size:17px;
+}
+
+/* Main Section */
+
+.order-details{
+    padding-bottom:60px;
+}
+
+/* Order Information */
+
+.order-info{
+    background:#fff;
+    color:#222;
+    border-radius:15px;
+    padding:30px;
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+    margin-bottom:40px;
+}
+
+.order-info h5{
+    color:#666;
+    font-size:14px;
+    text-transform:uppercase;
+    margin-bottom:8px;
+    font-weight:600;
+}
+
+.order-info p{
+    color:#222;
+    margin-bottom:0;
+    font-size:17px;
+}
+
+.order-info h3{
+    color:#198754;
+    font-weight:700;
+}
+
+/* Status */
+
+.order-details .status{
+    display:inline-block;
+    padding:8px 18px;
+    background:#0d6efd;
+    color:#fff;
+    border-radius:30px;
+    font-size:14px;
+    font-weight:600;
+}
+
+/* Headings */
+
+.order-details h2,
+.order-details h3{
+    color:#222;
+    font-weight:700;
+}
+
+/* Product Card */
+
+.product-row{
+    background:#fff;
+    color:#222;
+    border-radius:15px;
+    padding:20px;
+    margin-bottom:20px;
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+    transition:.3s;
+}
+
+.product-row:hover{
+    transform:translateY(-5px);
+    box-shadow:0 10px 25px rgba(0,0,0,.12);
+}
+
+.product-row h5{
+    font-weight:700;
+    margin-bottom:10px;
+}
+
+.product-row p{
+    color:#666;
+    font-size:14px;
+}
+
+.product-row b{
+    color:#111;
+    font-size:17px;
+}
+
+/* Product Image */
+
+.product-image{
+    width:100%;
+    height:120px;
+    object-fit:cover;
+    border-radius:10px;
+    border:2px solid #eee;
+}
+
+/* Divider */
+
+.order-details hr{
+    border:none;
+    border-top:2px dashed #ddd;
+}
+
+/* Buttons */
+
+.order-details .btn{
+    border-radius:8px;
+    padding:10px 20px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.order-details .btn:hover{
+    transform:translateY(-2px);
+    box-shadow:0 6px 15px rgba(0,0,0,.15);
+}
+
+/* Back Button */
+
+.order-details .btn-dark{
+    padding:12px 35px;
+}
+
+/* Responsive */
+
+@media (max-width:992px){
+
+    .order-info .col-md-3{
+        text-align:center;
+        margin-bottom:20px;
+    }
+
+    .product-row .col-md-2,
+    .product-row .col-md-4{
+        text-align:center;
+        margin-bottom:15px;
+    }
+
+    .product-image{
+        width:140px;
+        height:140px;
+        margin:auto;
+        display:block;
+    }
+
+    .order-details .d-flex{
+        justify-content:center;
+    }
+
+}
+
+@media (max-width:576px){
+
+    .order-banner{
+        margin-top:80px;
+        padding:45px 15px;
+    }
+
+    .order-banner h1{
+        font-size:28px;
+    }
+
+    .order-info{
+        padding:20px;
+    }
+
+    .product-row{
+        padding:15px;
+    }
+
+    .order-details .btn{
+        width:100%;
+        margin-bottom:10px;
+    }
+
+    .order-details .btn-dark{
+        width:100%;
+    }
+
+}

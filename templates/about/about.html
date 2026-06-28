@@ -1,0 +1,197 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}
+About Us | Malik Chicken Corner
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/about.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<section class="about-hero">
+
+    <div class="container">
+
+        <h1>About Malik Chicken Corner</h1>
+
+        <p>
+            Serving Fresh, Crispy & Delicious Chicken Since Day One.
+        </p>
+
+    </div>
+
+</section>
+
+<section class="about-section">
+
+    <div class="container">
+
+        <div class="row align-items-center">
+
+            <div class="col-lg-6">
+
+                <img src="{{ url_for('static', filename='images/about.jpg') }}"
+                     class="about-image"
+                     alt="About">
+
+            </div>
+
+            <div class="col-lg-6">
+
+                <h2>Who We Are</h2>
+
+                <p>
+
+                    Malik Chicken Corner is dedicated to serving fresh,
+                    hygienic and mouth-watering chicken dishes prepared
+                    with premium quality ingredients.
+
+                </p>
+
+                <p>
+
+                    From juicy grilled chicken to spicy fried chicken,
+                    burgers, rolls and refreshing drinks,
+                    we prepare every meal with love and passion.
+
+                </p>
+
+                <a href="/menu" class="btn btn-danger mt-3">
+                    Explore Menu
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section class="why-us">
+
+    <div class="container">
+
+        <h2 class="text-center mb-5">
+            Why Choose Us
+        </h2>
+
+        <div class="row">
+
+            <div class="col-md-3">
+
+                <div class="feature-box">
+
+                    <i class="fa-solid fa-drumstick-bite"></i>
+
+                    <h4>Fresh Chicken</h4>
+
+                    <p>
+                        Fresh ingredients every day.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-3">
+
+                <div class="feature-box">
+
+                    <i class="fa-solid fa-truck"></i>
+
+                    <h4>Fast Delivery</h4>
+
+                    <p>
+                        Hot food delivered quickly.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-3">
+
+                <div class="feature-box">
+
+                    <i class="fa-solid fa-award"></i>
+
+                    <h4>Best Quality</h4>
+
+                    <p>
+                        Premium taste with quality service.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-3">
+
+                <div class="feature-box">
+
+                    <i class="fa-solid fa-headset"></i>
+
+                    <h4>24/7 Support</h4>
+
+                    <p>
+                        We're always here for you.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section class="counter-section">
+
+    <div class="container">
+
+        <div class="row text-center">
+
+            <div class="col-md-3">
+
+                <h2>5000+</h2>
+
+                <p>Happy Customers</p>
+
+            </div>
+
+            <div class="col-md-3">
+
+                <h2>150+</h2>
+
+                <p>Food Items</p>
+
+            </div>
+
+            <div class="col-md-3">
+
+                <h2>4.9★</h2>
+
+                <p>Customer Rating</p>
+
+            </div>
+
+            <div class="col-md-3">
+
+                <h2>100%</h2>
+
+                <p>Fresh & Hygienic</p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

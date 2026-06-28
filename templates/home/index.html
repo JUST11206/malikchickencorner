@@ -1,0 +1,717 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}
+Home | Malik Chicken Corner
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+
+<section class="hero">
+<video autoplay muted loop playsinline class="hero-video">
+    <source src="{{ url_for('static', filename='video/bg2.mp4') }}" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
+    <div class="overlay">
+
+        <div class="container text-center">
+
+            <h1>
+                Welcome to
+                <span>Malik Chicken Corner</span>
+            </h1>
+
+            <p>
+                Fresh • Crispy • Delicious
+            </p>
+
+            <a href="/menu" class="btn btn-danger btn-lg">
+                Order Now
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- More sections will come here -->
+
+<!-- Categories -->
+ <section class="categories">
+
+    <div class="container">
+
+        <div class="section-title">
+            <h2>Browse Categories</h2>
+            <p>Choose your favorite food category</p>
+        </div>
+
+        <div class="row g-4">
+
+            <!-- Chicken -->
+            <div class="col-lg-3 col-md-6">
+
+                <a href="/menu?category=1" class="category-link">
+
+                    <div class="category-card">
+
+                        <img src="{{ url_for('static', filename='images/categories/chickentandoori.png') }}" alt="Chicken">
+
+                        <h4>Chicken</h4>
+
+                    </div>
+
+                </a>
+
+            </div>
+
+            <!-- Fishes -->
+            <div class="col-lg-3 col-md-6">
+
+                <a href="/menu?category=2" class="category-link">
+
+                    <div class="category-card">
+
+                        <img src="{{ url_for('static', filename='images/categories/b.png') }}" alt="Fishes">
+
+                        <h4>Fishes</h4>
+
+                    </div>
+
+                </a>
+
+            </div>
+
+            <!-- Mutton -->
+            <div class="col-lg-3 col-md-6">
+
+                <a href="/menu?category=3" class="category-link">
+
+                    <div class="category-card">
+
+                        <img src="{{ url_for('static', filename='images/categories/c.png') }}" alt="Mutton">
+
+                        <h4>Mutton</h4>
+
+                    </div>
+
+                </a>
+
+            </div>
+
+            <!-- Drinks -->
+            <div class="col-lg-3 col-md-6">
+
+                <a href="/menu?category=4" class="category-link">
+
+                    <div class="category-card">
+
+                        <img src="{{ url_for('static', filename='images/categories/d.png') }}" alt="Drinks">
+
+                        <h4>Drinks</h4>
+
+                    </div>
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- Offers -->
+<!-- ===========================
+     Today's Special Offers
+=========================== -->
+
+<section class="offers">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <h2>🔥 Today's Special Offers</h2>
+
+            <p>Grab exciting deals before they end!</p>
+
+        </div>
+
+        <div class="row g-4">
+
+            <!-- Offer 1 -->
+
+            <div class="col-lg-4">
+
+                <div class="offer-card">
+
+                    <img src="{{ url_for('static', filename='images/offers/c.jpg') }}" alt="Offer">
+
+                    <div class="offer-content">
+
+                        <span class="badge bg-danger">30% OFF</span>
+
+                        <h3>Chicken Kawab</h3>
+
+                        <p>Only Today</p>
+
+                        <a href="/menu" class="btn btn-warning">
+                            Order Now
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Offer 2 -->
+
+            <div class="col-lg-4">
+
+                <div class="offer-card">
+
+                    <img src="{{ url_for('static', filename='images/offers/handi.jpg') }}" alt="Offer">
+
+                    <div class="offer-content">
+
+                        <span class="badge bg-success">Buy 4 Get 1</span>
+
+                        <h3>Chicken Handi</h3>
+
+                        <p>Limited Time</p>
+
+                        <a href="/menu" class="btn btn-warning">
+                            Order Now
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Offer 3 -->
+
+            <div class="col-lg-4">
+
+                <div class="offer-card">
+
+                    <img src="{{ url_for('static', filename='images/offers/e.jpg') }}" alt="Offer">
+
+                    <div class="offer-content">
+
+                        <span class="badge bg-primary">FREE Drink</span>
+
+                        <h3>Family Combo</h3>
+
+                        <p>Weekend Offer</p>
+
+                        <a href="/menu" class="btn btn-warning">
+                            Order Now
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ===========================
+     Best Selling Products
+=========================== -->
+
+<section class="products">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <h2>Best Selling Products</h2>
+
+            <p>Our most loved dishes</p>
+
+        </div>
+
+        <div class="row g-4">
+
+            <!-- Product 1 -->
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="product-card">
+
+                    <div class="product-image">
+
+                        <img src="{{ url_for('static', filename='images/products/changeji.jpg') }}" alt="Chicken Changeji">
+
+                        <span class="discount">-20%</span>
+
+                    </div>
+
+                    <div class="product-info">
+
+                        <h4>Chicken Changeji</h4>
+
+                        <div class="rating">
+                            ⭐⭐⭐⭐⭐
+                        </div>
+
+                        <h5>
+                            ₹159
+                            <small><del>₹180</del></small>
+                        </h5>
+
+
+<div class="product-buttons">
+
+    <a href="{{ url_for('menu') }}" class="btn btn-danger">
+        <i class="fa-solid fa-cart-shopping"></i>
+        Add
+    </a>
+
+    <a href="{{ url_for('menu') }}" class="btn btn-outline-danger">
+        Buy Now
+    </a>
+
+</div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Repeat for more products -->
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="product-card">
+
+                    <div class="product-image">
+
+                        <img src="{{ url_for('static', filename='images/products/chickentandoori.jpg') }}" alt="Chicken Burger">
+
+                        <span class="discount">-15%</span>
+
+                    </div>
+
+                    <div class="product-info">
+
+                        <h4>Chicken Roasted</h4>
+
+                        <div class="rating">
+                            ⭐⭐⭐⭐⭐
+                        </div>
+
+                        <h5>
+                            ₹139
+                            <small><del>₹169</del></small>
+                        </h5>
+
+<div class="product-buttons">
+
+    <a href="{{ url_for('menu') }}" class="btn btn-danger">
+        <i class="fa-solid fa-cart-shopping"></i>
+        Add
+    </a>
+
+    <a href="{{ url_for('menu') }}" class="btn btn-outline-danger">
+        Buy Now
+    </a>
+
+</div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="product-card">
+
+                    <div class="product-image">
+
+                        <img src="{{ url_for('static', filename='images/products/tikka.jpg') }}" alt="Chicken Burger">
+
+                        <span class="discount">-20%</span>
+
+                    </div>
+
+                    <div class="product-info">
+
+                        <h4>Chicken Tikka</h4>
+
+                        <div class="rating">
+                            ⭐⭐⭐⭐⭐
+                        </div>
+
+                        <h5>
+                            ₹199
+                            <small><del>₹220</del></small>
+                        </h5>
+
+<div class="product-buttons">
+
+    <a href="{{ url_for('menu') }}" class="btn btn-danger">
+        <i class="fa-solid fa-cart-shopping"></i>
+        Add
+    </a>
+
+    <a href="{{ url_for('menu') }}" class="btn btn-outline-danger">
+        Buy Now
+    </a>
+
+</div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="product-card">
+
+                    <div class="product-image">
+
+                        <img src="{{ url_for('static', filename='images/products/kawab.jpg') }}" alt="Chicken Kawab">
+
+                        <span class="discount">-20%</span>
+
+                    </div>
+
+                    <div class="product-info">
+
+                        <h4>Chicken Kawab</h4>
+
+                        <div class="rating">
+                            ⭐⭐⭐⭐⭐
+                        </div>
+
+                        <h5>
+                            ₹80
+                            <small><del>₹100</del></small>
+                        </h5>
+
+<div class="product-buttons">
+
+    <a href="{{ url_for('menu') }}" class="btn btn-danger">
+        <i class="fa-solid fa-cart-shopping"></i>
+        Add
+    </a>
+
+    <a href="{{ url_for('menu') }}" class="btn btn-outline-danger">
+        Buy Now
+    </a>
+
+</div>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ===========================
+     Why Choose Us
+=========================== -->
+
+<section class="why-us">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <h2>Why Choose Us?</h2>
+
+            <p>Fresh Food • Fast Delivery • Best Quality</p>
+
+        </div>
+
+        <div class="row g-4">
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="feature-box">
+
+                    <i class="fa-solid fa-drumstick-bite"></i>
+
+                    <h4>Fresh Chicken</h4>
+
+                    <p>Premium quality chicken prepared fresh every day.</p>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="feature-box">
+
+                    <i class="fa-solid fa-truck-fast"></i>
+
+                    <h4>Fast Delivery</h4>
+
+                    <p>Quick and safe delivery right to your doorstep.</p>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="feature-box">
+
+                    <i class="fa-solid fa-award"></i>
+
+                    <h4>Best Quality</h4>
+
+                    <p>Prepared with premium ingredients and hygienic standards.</p>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="feature-box">
+
+                    <i class="fa-solid fa-headset"></i>
+
+                    <h4>24/7 Support</h4>
+
+                    <p>We're always here to help with your orders.</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+<!-- ===========================
+     Food Gallery
+=========================== -->
+
+<section class="gallery">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <h2>Food Gallery</h2>
+
+            <p>Take a look at our delicious dishes</p>
+
+        </div>
+
+        <div class="row g-4">
+
+            <div class="col-lg-4 col-md-6">
+                <div class="gallery-item">
+                    <img src="{{ url_for('static', filename='images/gallery/Handi.jpg') }}" alt="">
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <div class="gallery-item">
+                    <img src="{{ url_for('static', filename='images/gallery/chickentandoori.jpg') }}" alt="">
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <div class="gallery-item">
+                    <img src="{{ url_for('static', filename='images/gallery/b.jpg') }}" alt="">
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <div class="gallery-item">
+                    <img src="{{ url_for('static', filename='images/gallery/a.jpg') }}" alt="">
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <div class="gallery-item">
+                    <img src="{{ url_for('static', filename='images/gallery/d.jpg') }}" alt="">
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <div class="gallery-item">
+                    <img src="{{ url_for('static', filename='images/gallery/Changeji.jpg') }}" alt="">
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+<!-- ===========================
+     ORDER CTA
+=========================== -->
+
+<section class="order-cta">
+
+    <div class="container">
+
+        <div class="cta-box">
+
+            <h2>Hungry? Order Your Favorite Chicken Now!</h2>
+
+            <p>
+                Fresh • Hot • Crispy • Delivered in 30 Minutes
+            </p>
+
+            <div class="cta-buttons">
+
+                <a href="/menu" class="btn btn-danger btn-lg">
+
+                    <i class="fa-solid fa-cart-shopping"></i>
+
+                    Order Now
+
+                </a>
+
+                <a href="/offers" class="btn btn-outline-light btn-lg">
+
+                    <i class="fa-solid fa-tags"></i>
+
+                    View Offers
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ===========================
+     Customer Reviews
+=========================== -->
+
+<section class="reviews">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <h2>What Our Customers Say</h2>
+
+            <p>Real feedback from our happy customers</p>
+
+        </div>
+
+        <div class="row g-4">
+
+            <!-- Review 1 -->
+
+            <div class="col-lg-4 col-md-6">
+
+                <div class="review-card">
+
+                    <img src="{{ url_for('static', filename='images/users/lucky.jpg') }}" alt="Customer">
+
+                    <h4>Lucky</h4>
+
+                    <div class="stars">
+                        ⭐⭐⭐⭐⭐
+                    </div>
+
+                    <p>
+                        "The chicken was super fresh and crispy. Delivery was
+                        quick and the packaging was excellent!"
+                    </p>
+
+                </div>
+
+            </div>
+
+            <!-- Review 2 -->
+
+            <div class="col-lg-4 col-md-6">
+
+                <div class="review-card">
+
+                    <img src="{{ url_for('static', filename='images/users/aris.jpg') }}" alt="Customer">
+
+                    <h4>Aris Qureshi</h4>
+
+                    <div class="stars">
+                        ⭐⭐⭐⭐
+                    </div>
+
+                    <p>
+                        "Best chicken burger I've had! Highly recommended.
+                        Will definitely order again."
+                    </p>
+
+                </div>
+
+            </div>
+
+            <!-- Review 3 -->
+
+            <div class="col-lg-4 col-md-6">
+
+                <div class="review-card">
+
+                    <img src="{{ url_for('static', filename='images/users/aman.jpg') }}" alt="Customer">
+
+                    <h4>Aman Khan</h4>
+
+                    <div class="stars">
+                        ⭐⭐⭐⭐⭐
+                    </div>
+
+                    <p>
+                        "Amazing taste, affordable prices, and excellent
+                        customer service."
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}
+
+{% block js %}
+<script src="{{ url_for('static', filename='js/home.js') }}"></script>
+{% endblock %}

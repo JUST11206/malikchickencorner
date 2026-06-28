@@ -1,0 +1,366 @@
+
+{% extends 'layout/base.html' %}
+
+{% block title %}
+Checkout | Malik Chicken Corner
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/checkout.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<!-- ==========================
+        PAGE HEADER
+========================== -->
+
+<section class="checkout-header">
+
+    <div class="container">
+
+        <h1>
+            <i class="fa-solid fa-credit-card"></i>
+            Checkout
+        </h1>
+
+        <p>
+            Complete your order and enjoy delicious food.
+        </p>
+
+    </div>
+
+</section>
+
+<!-- ==========================
+        CHECKOUT SECTION
+========================== -->
+
+<section class="checkout-section">
+
+<div class="container">
+
+<div class="row">
+
+<!-- ==========================
+        CUSTOMER DETAILS
+========================== -->
+
+<div class="col-lg-8">
+
+<div class="checkout-form">
+
+<h3>
+
+Billing Details
+
+</h3>
+
+<form action="/place-order" method="POST">
+
+<div class="row">
+
+<div class="col-md-6 mb-3">
+
+<label>Full Name</label>
+
+<input
+type="text"
+name="fullname"
+class="form-control"
+placeholder="Enter your full name"
+required>
+
+</div>
+
+<div class="col-md-6 mb-3">
+
+<label>Phone Number</label>
+
+<input
+type="text"
+name="phone"
+class="form-control"
+placeholder="Enter phone number"
+required>
+
+</div>
+
+</div>
+
+<div class="mb-3">
+
+<label>Email Address</label>
+
+<input
+type="email"
+name="email"
+class="form-control"
+placeholder="Enter email">
+
+</div>
+
+<div class="mb-3">
+
+<label>Delivery Address</label>
+
+<textarea
+class="form-control"
+name="address"
+rows="4"
+placeholder="House No, Street, Area..."
+required></textarea>
+
+</div>
+
+<div class="row">
+
+<div class="col-md-6 mb-3">
+
+<label>City</label>
+
+<input
+type="text"
+name="city"
+class="form-control"
+placeholder="City"
+required>
+
+</div>
+
+<div class="col-md-6 mb-3">
+
+<label>Pincode</label>
+
+<input
+type="text"
+name="pincode"
+class="form-control"
+placeholder="Pincode"
+required>
+
+</div>
+
+</div>
+
+<!-- Payment -->
+
+<div class="payment-method">
+
+<h5>
+
+Choose Payment Method
+
+</h5>
+
+<div class="payment-option">
+
+<label>
+
+<input
+type="radio"
+name="payment"
+value="COD"
+checked>
+
+Cash On Delivery
+
+</label>
+
+</div>
+
+<div class="payment-option">
+
+<label>
+
+<input
+type="radio"
+name="payment"
+value="UPI">
+
+UPI Payment
+
+</label>
+
+</div>
+
+<div class="payment-option">
+
+<label>
+
+<input
+type="radio"
+name="payment"
+value="CARD">
+
+Debit / Credit Card
+
+</label>
+
+</div>
+
+</div>
+
+<button
+type="submit"
+class="btn btn-danger place-order">
+<a href="{{ url_for('place_order') }}"
+class="btn btn-danger btn-lg w-100">
+
+Place Order
+
+</a>
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+<!-- ==========================
+        ORDER SUMMARY
+========================== -->
+
+<div class="col-lg-4">
+
+<div class="order-summary">
+
+<h3>
+
+Order Summary
+
+</h3>
+
+{% if cart_items %}
+
+{% for item in cart_items %}
+
+<div class="summary-item">
+
+<span>
+
+{{ item.product.name }}
+× {{ item.quantity }}
+
+</span>
+
+<span>
+
+₹{{ item.product.price * item.quantity }}
+
+</span>
+
+</div>
+
+{% endfor %}
+
+<hr>
+
+<div class="summary-item">
+
+<span>
+
+Subtotal
+
+</span>
+
+<span>
+
+₹{{ total }}
+
+</span>
+
+</div>
+
+<div class="summary-item">
+
+<span>
+
+Delivery
+
+</span>
+
+<span>
+
+₹50
+
+</span>
+
+</div>
+
+<div class="summary-item">
+
+<span>
+
+Discount
+
+</span>
+
+<span>
+
+-₹100
+
+</span>
+
+</div>
+
+<hr>
+
+<div class="summary-total">
+
+<span>
+
+Grand Total
+
+</span>
+
+<span>
+
+₹{{ total + 50 - 100 }}
+
+</span>
+
+</div>
+
+{% else %}
+
+<div class="text-center">
+
+<i class="fa-solid fa-cart-shopping fa-3x mb-3"></i>
+
+<h4>
+
+Your Cart is Empty
+
+</h4>
+
+<p>
+
+Add products before checkout.
+
+</p>
+
+<a
+href="/menu"
+class="btn btn-danger">
+
+Browse Menu
+
+</a>
+
+</div>
+
+{% endif %}
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+{% endblock %}

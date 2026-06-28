@@ -1,0 +1,217 @@
+/* ==========================================
+   GOOGLE FONT
+========================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+/* ==========================================
+   RESET
+========================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+
+    font-family:'Poppins',sans-serif;
+
+    background:#0f0f0f;
+
+    color:#fff;
+
+    overflow-x:hidden;
+
+    line-height:1.6;
+
+}
+
+/* ==========================================
+   GLOBAL LINKS
+========================================== */
+
+a{
+
+    text-decoration:none;
+
+    color:inherit;
+
+}
+
+/* ==========================================
+   GLOBAL IMAGES
+========================================== */
+
+img{
+
+    max-width:100%;
+
+    height:auto;
+
+    display:block;
+
+}
+
+/* ==========================================
+   PAGE CONTENT
+========================================== */
+
+.page-content{
+
+    padding-top:130px;
+
+}
+
+/* ==========================================
+   CUSTOM BUTTONS
+========================================== */
+
+.btn-primary-custom{
+
+    background:#ff3b30;
+
+    color:#fff;
+
+    border:none;
+
+    border-radius:30px;
+
+    padding:12px 30px;
+
+    transition:.3s;
+
+}
+
+.btn-primary-custom:hover{
+
+    background:#ff5722;
+
+    color:#fff;
+
+    transform:translateY(-3px);
+
+}
+
+.btn-outline-custom{
+
+    border:2px solid #ff3b30;
+
+    color:#ff3b30;
+
+    border-radius:30px;
+
+    padding:12px 30px;
+
+    transition:.3s;
+
+}
+
+.btn-outline-custom:hover{
+
+    background:#ff3b30;
+
+    color:#fff;
+
+}
+
+/* ==========================================
+   CUSTOM CARD
+========================================== */
+
+.custom-card{
+
+    background:#1b1b1b;
+
+    border-radius:18px;
+
+    overflow:hidden;
+
+    transition:.3s;
+
+}
+
+.custom-card:hover{
+
+    transform:translateY(-6px);
+
+    box-shadow:0 15px 35px rgba(0,0,0,.35);
+
+}
+
+/* ==========================================
+   UTILITIES
+========================================== */
+
+.text-red{
+
+    color:#ff3b30;
+
+}
+
+.text-yellow{
+
+    color:#ffc107;
+
+}
+
+.bg-dark-custom{
+
+    background:#111;
+
+}
+
+.mt-80{
+
+    margin-top:80px;
+
+}
+
+.mb-80{
+
+    margin-bottom:80px;
+
+}
+
+/* ==========================================
+   SCROLLBAR
+========================================== */
+
+::-webkit-scrollbar{
+
+    width:8px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#111;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#ff3b30;
+
+    border-radius:20px;
+
+}
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media (max-width:768px){
+
+    .page-content{
+
+        padding-top:80px;
+
+    }
+
+}

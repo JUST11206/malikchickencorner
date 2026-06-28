@@ -1,0 +1,165 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}
+Offers | Malik Chicken Corner
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/offers.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<section class="offers-page">
+
+    <div class="container">
+
+        <div class="page-title">
+
+            <h1>🔥 Special Offers</h1>
+
+            <p>
+                Fresh Deals • Limited Time • Best Prices
+            </p>
+
+        </div>
+
+        <div class="row g-4">
+
+            <!-- Offer 1 -->
+
+            <div class="col-lg-4 col-md-6">
+
+                <div class="offer-card">
+
+                    <span class="discount">
+                        20% OFF
+                    </span>
+
+                    <img src="{{ url_for('static', filename='images/offers/c.jpg') }}">
+
+                    <div class="offer-body">
+
+                        <h3>Grilled Chicken</h3>
+
+                        <p>
+                            Delicious smoky grilled chicken with fresh herbs.
+                        </p>
+
+                        <h4>
+
+                            ₹399
+
+                            <span>
+                                ₹499
+                            </span>
+
+                        </h4>
+
+                        <a href="/menu"
+                           class="btn btn-danger w-100">
+
+                            Order Now
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Offer 2 -->
+
+            <div class="col-lg-4 col-md-6">
+
+                <div class="offer-card">
+
+                    <span class="discount">
+                        Buy 4 Get 1
+                    </span>
+
+                    <img src="{{ url_for('static', filename='images/offers/a.jpg') }}">
+
+                    <div class="offer-body">
+
+                        <h3>Chicken Handi</h3>
+
+                        <p>
+                            Buy one delicious  and get another FREE items.
+                        </p>
+
+                        <h4>
+
+                            ₹219
+
+                            <span>
+                                ₹399
+                            </span>
+
+                        </h4>
+
+                        <a href="/menu"
+                           class="btn btn-danger w-100">
+
+                            Order Now
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Offer 3 -->
+
+            <div class="col-lg-4 col-md-6">
+
+                <div class="offer-card">
+
+                    <span class="discount">
+                        FREE Drink
+                    </span>
+
+                    <img src="{{ url_for('static', filename='images/offers/e.jpg') }}">
+
+                    <div class="offer-body">
+
+                        <h3>Family Bucket</h3>
+
+                        <p>
+                            Order Family Bucket and get a FREE cold drink.
+                        </p>
+
+                        <h4>
+
+                            ₹899
+
+                            <span>
+                                ₹999
+                            </span>
+
+                        </h4>
+
+                        <a href="/menu"
+                           class="btn btn-danger w-100">
+
+                            Order Now
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

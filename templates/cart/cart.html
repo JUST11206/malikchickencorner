@@ -1,0 +1,214 @@
+```html
+{% extends 'layout/base.html' %}
+
+{% block title %}
+Shopping Cart | Malik Chicken Corner
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/cart.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<section class="cart-header">
+
+    <div class="container">
+
+        <h1>
+            <i class="fa-solid fa-cart-shopping"></i>
+            Shopping Cart
+        </h1>
+
+        <p>Review your delicious order before checkout.</p>
+
+    </div>
+
+</section>
+
+<section class="cart-section">
+
+<div class="container">
+
+<div class="row">
+
+<!-- LEFT SIDE -->
+
+<div class="col-lg-8">
+
+{% if cart_items %}
+
+{% for item in cart_items %}
+
+<div class="cart-card">
+
+<div class="row align-items-center">
+
+<div class="col-md-3">
+
+{% if item.product.image %}
+<img src="{{ url_for('static', filename=item.product.image) }}"
+class="cart-image"
+alt="{{ item.product.name }}">
+{% else %}
+<img src="{{ url_for('static', filename='images/placeholder.png') }}"
+class="cart-image">
+{% endif %}
+
+</div>
+
+<div class="col-md-4">
+
+<h4>{{ item.product.name }}</h4>
+
+<p>{{ item.product.description }}</p>
+
+<span class="price">
+₹{{ item.product.price }}
+</span>
+
+</div>
+
+<div class="col-md-3">
+
+<div class="quantity">
+
+<a href="/decrease-cart/{{ item.id }}"
+class="btn btn-danger btn-sm">
+
+<i class="fa-solid fa-minus"></i>
+
+</a>
+
+<input
+type="text"
+value="{{ item.quantity }}"
+readonly>
+
+<a href="/increase-cart/{{ item.id }}"
+class="btn btn-danger btn-sm">
+
+<i class="fa-solid fa-plus"></i>
+
+</a>
+
+</div>
+
+</div>
+
+<div class="col-md-2 text-end">
+
+<h4 class="total">
+
+₹{{ item.product.price * item.quantity }}
+
+</h4>
+
+<a href="/remove-cart/{{ item.id }}"
+class="remove">
+
+Remove
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+{% endfor %}
+
+{% else %}
+
+<div class="text-center text-white py-5">
+
+<h2>Your Cart is Empty</h2>
+
+<p>Add some delicious food from our menu.</p>
+
+<a href="/menu"
+class="btn btn-danger">
+
+Browse Menu
+
+</a>
+
+</div>
+
+{% endif %}
+
+</div>
+
+<!-- RIGHT SIDE -->
+
+<div class="col-lg-4">
+
+<div class="summary">
+
+<h3>Order Summary</h3>
+
+<div class="summary-item">
+
+<span>Subtotal</span>
+
+<span>₹{{ total }}</span>
+
+</div>
+
+<div class="summary-item">
+
+<span>Delivery</span>
+
+<span>₹50</span>
+
+</div>
+
+<div class="summary-item">
+
+<span>Discount</span>
+
+<span>-₹60</span>
+
+</div>
+
+<hr>
+
+<div class="summary-total">
+
+<span>Total</span>
+
+<span>
+
+₹{{ total + 50 - 60 }}
+
+</span>
+
+</div>
+
+<a href="/checkout"
+class="btn btn-danger w-100 mt-4">
+
+Proceed To Checkout
+
+</a>
+
+<a href="/menu"
+class="btn btn-outline-light w-100 mt-2">
+
+Continue Shopping
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+{% endblock %}
+

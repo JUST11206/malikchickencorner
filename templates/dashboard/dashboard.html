@@ -1,0 +1,320 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}
+My Dashboard
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/dashboard.css') }}">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+{% endblock %}
+
+{% block content %}
+
+<section class="dashboard-section">
+
+<div class="container">
+
+<div class="row">
+
+    <!-- LEFT PROFILE -->
+
+    <div class="col-lg-4 mb-4">
+
+        <div class="profile-card">
+
+            <div class="profile-avatar">
+
+                {{ user.fullname[0]|upper }}
+
+            </div>
+
+            <h2>
+
+                {{ user.fullname }}
+
+            </h2>
+
+            <span class="user-role">
+
+                Customer
+
+            </span>
+
+            <hr>
+
+            <div class="profile-info">
+
+                <p>
+
+                    <i class="fa-solid fa-envelope"></i>
+
+                    {{ user.email }}
+
+                </p>
+
+                <p>
+
+                    <i class="fa-solid fa-phone"></i>
+
+                    {{ user.phone }}
+
+                </p>
+
+            </div>
+
+            <a href="{{ url_for('logout') }}"
+               class="btn btn-danger w-100 mt-4">
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+
+                Logout
+
+            </a>
+
+        </div>
+
+    </div>
+
+    <!-- RIGHT SIDE -->
+
+    <div class="col-lg-8">
+
+        <h2 class="dashboard-title">
+
+            Welcome Back, {{ user.fullname }} 👋
+
+        </h2>
+
+        <p class="dashboard-subtitle">
+
+            Manage your account, orders and shopping.
+
+        </p>
+
+        <!-- QUICK ACTIONS -->
+
+        <div class="row g-4 mt-2">
+
+            <div class="col-md-3">
+
+                <a href="{{ url_for('menu') }}" class="dashboard-action">
+
+                    <i class="fas fa-utensils"></i>
+
+                    <span>Browse Menu</span>
+
+                </a>
+
+            </div>
+
+            <div class="col-md-3">
+
+                <a href="{{ url_for('cart') }}" class="dashboard-action">
+
+                    <i class="fas fa-cart-shopping"></i>
+
+                    <span>My Cart</span>
+
+                </a>
+
+            </div>
+
+            <div class="col-md-3">
+
+                <a href="{{ url_for('wishlist') }}" class="dashboard-action">
+
+                    <i class="fas fa-heart"></i>
+
+                    <span>Wishlist</span>
+
+                </a>
+
+            </div>
+
+            <div class="col-md-3">
+
+                <a href="{{ url_for('my_orders') }}" class="dashboard-action">
+
+                    <i class="fas fa-box"></i>
+
+                    <span>My Orders</span>
+
+                </a>
+
+            </div>
+
+        </div>
+
+        <!-- STATS -->
+
+        <div class="row g-4 mt-4">
+
+            <div class="col-md-4">
+
+                <div class="stats-card">
+
+                    <i class="fas fa-box-open"></i>
+
+                    <h3>{{ total_orders }}</h3>
+
+                    <p>Total Orders</p>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <div class="stats-card">
+
+                    <i class="fas fa-heart"></i>
+
+                    <h3>{{ wishlist_count }}</h3>
+
+                    <p>Wishlist</p>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <div class="stats-card">
+
+                    <i class="fas fa-cart-shopping"></i>
+
+                    <h3>{{ cart_count }}</h3>
+
+                    <p>Cart Items</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- RECENT ORDERS -->
+
+        <div class="recent-orders mt-5">
+
+            <div class="d-flex justify-content-between align-items-center mb-4">
+
+                <h3>
+
+                    Recent Orders
+
+                </h3>
+
+                <a href="{{ url_for('my_orders') }}"
+                   class="btn btn-outline-danger">
+
+                    View All
+
+                </a>
+
+            </div>
+
+            {% if recent_orders %}
+
+            <div class="table-responsive">
+
+                <table class="table align-middle">
+
+                    <thead>
+
+                    <tr>
+
+                        <th>ID</th>
+
+                        <th>Date</th>
+
+                        <th>Status</th>
+
+                        <th>Total</th>
+
+                        <th></th>
+
+                    </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                    {% for order in recent_orders %}
+
+                    <tr>
+
+                        <td>
+
+                            #{{ order.id }}
+
+                        </td>
+
+                        <td>
+
+                            {{ order.created_at.strftime('%d %b %Y') }}
+
+                        </td>
+
+                        <td>
+
+                            <span class="badge bg-danger">
+
+                                {{ order.status }}
+
+                            </span>
+
+                        </td>
+
+                        <td>
+
+                            ₹{{ order.total_amount }}
+
+                        </td>
+
+                        <td>
+
+                            <a href="{{ url_for('order_details', order_id=order.id) }}"
+                               class="btn btn-sm btn-danger">
+
+                                View
+
+                            </a>
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            {% else %}
+
+            <div class="alert alert-light text-center">
+
+                No orders yet.
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+</section>
+
+{% endblock %}

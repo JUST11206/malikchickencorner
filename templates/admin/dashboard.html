@@ -1,0 +1,209 @@
+
+{% extends 'layout/base.html' %}
+
+{% block title %}
+Admin Dashboard
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/admin_dashboard.css') }}">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+{% endblock %}
+
+{% block content %}
+
+<section class="dashboard">
+
+<div class="container">
+
+<h2 class="mb-5 text-center">
+
+Admin Dashboard
+
+</h2>
+
+<div class="row g-4">
+
+    <!-- Products -->
+    <div class="col-lg-4 col-md-6">
+        <a href="{{ url_for('manage_products') }}" class="dashboard-link">
+
+            <div class="dashboard-card">
+
+                <i class="fas fa-drumstick-bite"></i>
+
+                <h4>{{ total_products }}</h4>
+
+                <p>Total Products</p>
+
+            </div>
+
+        </a>
+    </div>
+
+    <!-- Orders -->
+    <div class="col-lg-4 col-md-6">
+        <a href="{{ url_for('admin_orders') }}" class="dashboard-link">
+
+            <div class="dashboard-card">
+
+                <i class="fas fa-cart-shopping"></i>
+
+                <h4>{{ total_orders }}</h4>
+
+                <p>Total Orders</p>
+
+            </div>
+
+        </a>
+    </div>
+
+    <!-- Customers -->
+    <div class="col-lg-4 col-md-6">
+
+        <div class="dashboard-card">
+
+            <i class="fas fa-users"></i>
+
+            <h4>{{ total_customers }}</h4>
+
+            <p>Total Customers</p>
+
+        </div>
+
+    </div>
+
+    <!-- Revenue -->
+    <div class="col-lg-6 col-md-6">
+
+        <div class="dashboard-card">
+
+            <i class="fas fa-indian-rupee-sign"></i>
+
+            <h4>₹{{ revenue }}</h4>
+
+            <p>Total Revenue</p>
+
+        </div>
+
+    </div>
+
+    <!-- Pending Orders -->
+    <div class="col-lg-6 col-md-6">
+
+        <div class="dashboard-card">
+
+            <i class="fas fa-clock"></i>
+
+            <h4>{{ pending_orders }}</h4>
+
+            <p>Pending Orders</p>
+
+        </div>
+
+    </div>
+
+</div>
+
+<hr class="my-5">
+
+<h3 class="mb-4">
+
+Recent Orders
+
+</h3>
+
+<div class="table-responsive">
+
+<table class="table table-bordered table-hover align-middle">
+
+<thead class="table-dark">
+
+<tr>
+
+<th>Order ID</th>
+
+<th>Customer</th>
+
+<th>Amount</th>
+
+<th>Status</th>
+
+<th>Date</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+{% for order in recent_orders %}
+
+<tr>
+
+<td>
+
+#{{ order.id }}
+
+</td>
+
+<td>
+
+{{ order.user.fullname }}
+
+</td>
+
+<td>
+
+₹{{ order.total_amount }}
+
+</td>
+
+<td>
+
+<span class="badge bg-primary">
+
+{{ order.status }}
+
+</span>
+
+</td>
+
+<td>
+
+{{ order.created_at.strftime('%d %b %Y') }}
+
+</td>
+
+<td>
+
+<a href="{{ url_for('admin_order_details', order_id=order.id) }}"
+class="btn btn-sm btn-danger">
+
+View
+
+</a>
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</section>
+
+{% endblock %}
+

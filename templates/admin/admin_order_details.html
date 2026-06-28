@@ -1,0 +1,239 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}
+Admin | Order #{{ order.id }}
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/admin_order_details.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<section class="order-banner">
+
+    <div class="container">
+
+        <h1>Order #{{ order.id }}</h1>
+
+        <p>Manage Customer Order</p>
+
+    </div>
+
+</section>
+
+<section class="order-details">
+
+<div class="container">
+
+<div class="order-info">
+
+<div class="row">
+
+<div class="col-md-3">
+
+<h5>Customer</h5>
+
+<p>
+
+{{ order.user.fullname }}
+
+</p>
+
+</div>
+
+<div class="col-md-3">
+
+<h5>Order Date</h5>
+
+<p>
+
+{{ order.created_at.strftime('%d %B %Y') }}
+
+</p>
+
+</div>
+
+<div class="col-md-3">
+
+<h5>Status</h5>
+
+<span class="status">
+
+{{ order.status }}
+
+</span>
+
+</div>
+
+<div class="col-md-3">
+
+<h5>Total</h5>
+
+<h3>
+
+₹{{ order.total_amount }}
+
+</h3>
+
+</div>
+
+</div>
+
+</div>
+
+<h2 class="mt-5 mb-4">
+
+Ordered Items
+
+</h2>
+
+{% for item in items %}
+
+<div class="product-row">
+
+<div class="row align-items-center">
+
+<div class="col-md-2">
+
+<img
+src="{{ url_for('static', filename=item.product.image) }}"
+class="product-image">
+
+</div>
+
+<div class="col-md-4">
+
+<h5>
+
+{{ item.product.name }}
+
+</h5>
+
+<p>
+
+{{ item.product.description }}
+
+</p>
+
+</div>
+
+<div class="col-md-2">
+
+Quantity
+
+<br>
+
+<b>
+
+{{ item.quantity }}
+
+</b>
+
+</div>
+
+<div class="col-md-2">
+
+Price
+
+<br>
+
+<b>
+
+₹{{ item.price }}
+
+</b>
+
+</div>
+
+<div class="col-md-2">
+
+Total
+
+<br>
+
+<b>
+
+₹{{ item.price * item.quantity }}
+
+</b>
+
+</div>
+
+</div>
+
+</div>
+
+{% endfor %}
+
+<hr class="my-5">
+
+<h3 class="mb-4">
+
+Update Order Status
+
+</h3>
+
+<div class="d-flex flex-wrap gap-2">
+
+<a href="{{ url_for('update_order', order_id=order.id, status='Pending') }}"
+class="btn btn-secondary">
+
+Pending
+
+</a>
+
+<a href="{{ url_for('update_order', order_id=order.id, status='Confirmed') }}"
+class="btn btn-primary">
+
+Confirmed
+
+</a>
+
+<a href="{{ url_for('update_order', order_id=order.id, status='Preparing') }}"
+class="btn btn-warning">
+
+Preparing
+
+</a>
+
+<a href="{{ url_for('update_order', order_id=order.id, status='Out For Delivery') }}"
+class="btn btn-info">
+
+Out For Delivery
+
+</a>
+
+<a href="{{ url_for('update_order', order_id=order.id, status='Delivered') }}"
+class="btn btn-success">
+
+Delivered
+
+</a>
+
+<a href="{{ url_for('update_order', order_id=order.id, status='Cancelled') }}"
+class="btn btn-danger">
+
+Cancelled
+
+</a>
+
+</div>
+
+<div class="text-center mt-5">
+
+<a href="{{ url_for('admin_orders') }}"
+class="btn btn-dark">
+
+← Back To Orders
+
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+{% endblock %}

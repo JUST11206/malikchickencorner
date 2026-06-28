@@ -1,0 +1,181 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}
+Order #{{ order.id }}
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/order_details.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<section class="order-banner">
+
+    <div class="container">
+
+        <h1>
+
+            Order #{{ order.id }}
+
+        </h1>
+
+        <p>
+
+            Thank you for shopping with Malik Chicken Corner
+
+        </p>
+
+    </div>
+
+</section>
+
+<section class="order-details">
+
+<div class="container">
+
+<div class="order-info">
+
+<div class="row">
+
+<div class="col-md-4">
+
+<h5>Order Date</h5>
+
+<p>
+
+{{ order.created_at.strftime('%d %B %Y') }}
+
+</p>
+
+</div>
+
+<div class="col-md-4">
+
+<h5>Status</h5>
+
+<span class="status">
+
+{{ order.status }}
+
+</span>
+
+</div>
+
+<div class="col-md-4">
+
+<h5>Total</h5>
+
+<h3>
+
+₹{{ order.total_amount }}
+
+</h3>
+
+</div>
+
+</div>
+
+</div>
+
+<h2 class="mt-5 mb-4">
+
+Ordered Items
+
+</h2>
+
+{% for item in items %}
+
+<div class="product-row">
+
+<div class="row align-items-center">
+
+<div class="col-md-2">
+
+<img
+src="{{ url_for('static', filename=item.product.image) }}"
+class="product-image">
+
+</div>
+
+<div class="col-md-4">
+
+<h5>
+
+{{ item.product.name }}
+
+</h5>
+
+<p>
+
+{{ item.product.description }}
+
+</p>
+
+</div>
+
+<div class="col-md-2">
+
+Qty
+
+<br>
+
+<b>
+
+{{ item.quantity }}
+
+</b>
+
+</div>
+
+<div class="col-md-2">
+
+Price
+
+<br>
+
+<b>
+
+₹{{ item.price }}
+
+</b>
+
+</div>
+
+<div class="col-md-2">
+
+Total
+
+<br>
+
+<b>
+
+₹{{ item.price * item.quantity }}
+
+</b>
+
+</div>
+
+</div>
+
+</div>
+
+{% endfor %}
+
+<div class="text-center mt-5">
+
+<a href="/my-orders"
+class="btn btn-danger">
+
+← Back To My Orders
+
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+{% endblock %}

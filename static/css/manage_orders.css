@@ -1,0 +1,87 @@
+.admin-orders{
+    padding:140px 0 70px;
+    background:#f7f7f7;
+    min-height:80vh;
+}
+
+.admin-orders h2{
+    font-weight:700;
+    color:#b30000;
+    margin-bottom:30px;
+}
+
+.table{
+    background:#fff;
+    border-radius:15px;
+    overflow:hidden;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+.table th{
+    text-align:center;
+    vertical-align:middle;
+}
+
+.table td{
+    text-align:center;
+    vertical-align:middle;
+}
+
+.btn-danger{
+    border-radius:25px;
+    padding:6px 18px;
+}
+
+.badge{
+    padding:10px 15px;
+    font-size:14px;
+}
+
+@media(max-width:768px){
+
+    .admin-orders{
+        padding:120px 0 50px;
+    }
+
+}
+.table{
+
+background:white;
+
+border-radius:15px;
+
+overflow:hidden;
+
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+}
+
+.table th{
+
+text-align:center;
+
+}
+
+.table td{
+
+vertical-align:middle;
+
+text-align:center;
+
+}
+
+.btn-danger{
+
+border-radius:25px;
+
+padding:6px 18px;
+
+}
+
+.badge{
+
+padding:10px 15px;
+
+font-size:14px;
+
+}

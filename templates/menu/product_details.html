@@ -1,0 +1,132 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}
+{{ product.name }}
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/product_detail.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<section class="product-detail">
+
+<div class="container">
+
+<div class="row align-items-center g-5">
+
+<div class="col-lg-6">
+
+<div class="image-box">
+
+{% if product.image %}
+
+<img src="{{ url_for('static',
+filename=product.image) }}">
+
+{% else %}
+
+<img src="{{ url_for('static',
+filename='images/placeholder.png') }}">
+
+{% endif %}
+
+</div>
+
+</div>
+
+<div class="col-lg-6">
+
+<span class="category">
+
+{{ product.category.name }}
+
+</span>
+
+<h1>
+
+{{ product.name }}
+
+</h1>
+
+<div class="rating">
+
+⭐⭐⭐⭐⭐ (4.9)
+
+</div>
+
+<h2>
+
+₹{{ product.price }}
+
+</h2>
+
+<p>
+
+{{ product.description }}
+
+</p>
+
+<hr>
+
+<h5>
+
+Availability
+
+</h5>
+
+{% if product.stock > 0 %}
+
+<span class="stock in-stock">
+
+In Stock ({{ product.stock }})
+
+</span>
+
+{% else %}
+
+<span class="stock out-stock">
+
+Out of Stock
+
+</span>
+
+{% endif %}
+
+<div class="quantity mt-4">
+
+<label>
+
+Quantity
+
+</label>
+
+<input
+type="number"
+min="1"
+value="1">
+
+</div>
+
+<div class="buttons mt-4">
+<a href="{{ url_for('add_to_cart', product_id=product.id) }}"
+   class="btn btn-danger">
+    <i class="fa-solid fa-cart-shopping"></i>
+    Add To Cart
+</a>
+<a href="{{ url_for('checkout') }}" class="btn btn-danger">
+    Buy Now
+</a>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+{% endblock %}

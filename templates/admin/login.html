@@ -1,0 +1,58 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}
+Admin Login
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/admin_login.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<section class="admin-login">
+
+    <div class="login-card">
+
+        <h2>👨‍💼 Admin Login</h2>
+
+        <form method="POST">
+
+            <div class="mb-3">
+
+                <label>Email Address</label>
+
+                <input
+                    type="email"
+                    name="email"
+                    class="form-control"
+                    placeholder="Enter admin email"
+                    required>
+
+            </div>
+
+            <div class="mb-4">
+
+                <label>Password</label>
+
+                <input
+                    type="password"
+                    name="password"
+                    class="form-control"
+                    placeholder="Enter password"
+                    required>
+
+            </div>
+
+            <button type="submit" class="btn btn-danger w-100">
+                Login
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
+
+{% endblock %}

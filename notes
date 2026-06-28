@@ -1,0 +1,19 @@
+O6D0n0Y15CLrT1se
+
+mysql+pymysql://2AWusU3tdEfVkHQ.root:O6D0n0Y15CLrT1se@gateway01.ap-southeast-1.prod.alicloud.tidbcloud.com:4000/malik_chicken_corner?ssl_ca=<CA_PATH>&ssl_verify_cert=true&ssl_verify_identity=true
+
+
+admin
+$2y$10$6j91faTVsl9qap3NRiEszecznsL97lJBr0umFs34gKNYMhgSrS1je
+
+INSERT INTO users
+(fullname,email,phone,password,role)
+
+VALUES
+(
+'Saif Malik',
+'saifmalik7217@gnail.com',
+'7065182504',
+'$2y$10$6j91faTVsl9qap3NRiEszecznsL97lJBr0umFs34gKNYMhgSrS1je',
+'admin'
+);

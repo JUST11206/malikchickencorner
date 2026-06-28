@@ -1,0 +1,186 @@
+/* ==========================
+   MY ORDERS PAGE
+========================== */
+
+.orders-banner{
+    background: linear-gradient(135deg,#d10000,#8b0000);
+    color:#fff;
+    padding:70px 0;
+    text-align:center;
+}
+
+.orders-banner h1{
+    font-size:42px;
+    font-weight:700;
+    margin-bottom:10px;
+}
+
+.orders-banner p{
+    font-size:18px;
+    opacity:.9;
+}
+
+.orders-section{
+    background:#f8f9fa;
+    padding:70px 0;
+}
+
+/* ==========================
+   ORDER CARD
+========================== */
+
+.order-card{
+    background:#fff;
+    border-radius:18px;
+    padding:30px;
+    margin-bottom:25px;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+    transition:.3s;
+}
+
+.order-card:hover{
+    transform:translateY(-5px);
+}
+
+/* Order Number */
+
+.order-id{
+    color:#222;
+    font-size:24px;
+    font-weight:700;
+    margin-bottom:6px;
+}
+
+/* Date */
+
+.order-date{
+    display:block;
+    color:#777;
+    font-size:14px;
+    font-weight:500;
+}
+
+/* Price */
+
+.price{
+    font-size:32px;
+    color:#c40000;
+    font-weight:700;
+}
+
+/* Status */
+
+.status{
+    display:inline-block;
+    padding:10px 24px;
+    border-radius:30px;
+    color:#fff;
+    font-size:15px;
+    font-weight:600;
+}
+
+.pending{
+    background:#ff9800;
+}
+
+.delivered{
+    background:#28a745;
+}
+
+.preparing{
+    background:#2196f3;
+}
+
+.cancelled{
+    background:#dc3545;
+}
+
+/* Button */
+
+.order-card .btn{
+    border-radius:30px;
+    padding:10px 25px;
+    font-weight:600;
+}
+
+/* ==========================
+   EMPTY ORDERS
+========================== */
+
+.empty-orders{
+    background:#fff;
+    padding:70px;
+    border-radius:20px;
+    text-align:center;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+.empty-orders i{
+    font-size:80px;
+    color:#d10000;
+    margin-bottom:20px;
+}
+
+.empty-orders h2{
+    font-size:34px;
+    font-weight:700;
+}
+
+.empty-orders p{
+    color:#666;
+    margin:20px 0;
+}
+
+.empty-orders .btn{
+    padding:12px 35px;
+    border-radius:30px;
+}
+
+/* ==========================
+   MOBILE
+========================== */
+
+@media(max-width:991px){
+
+.order-card{
+    text-align:center;
+}
+
+.order-id{
+    margin-bottom:8px;
+}
+
+.order-date{
+    margin-bottom:20px;
+}
+
+.price{
+    margin:20px 0;
+}
+
+.status{
+    margin:20px 0;
+}
+
+.order-card .text-lg-end{
+    text-align:center !important;
+    margin-top:20px;
+}
+
+}
+
+@media(max-width:576px){
+
+.orders-banner h1{
+    font-size:32px;
+}
+
+.price{
+    font-size:28px;
+}
+
+.order-id{
+    font-size:22px;
+}
+
+}

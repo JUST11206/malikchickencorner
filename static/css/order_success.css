@@ -1,0 +1,97 @@
+.success-section{
+    background:#f8f9fa;
+    padding:80px 0;
+    min-height:80vh;
+}
+
+.success-card{
+    max-width:700px;
+    margin:auto;
+    background:#fff;
+    padding:50px;
+    border-radius:20px;
+    box-shadow:0 15px 40px rgba(0,0,0,.1);
+    text-align:center;
+}
+
+.success-icon{
+    width:120px;
+    height:120px;
+    margin:auto;
+    border-radius:50%;
+    background:#28a745;
+    color:#fff;
+    font-size:60px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin-bottom:30px;
+}
+
+.success-card h1{
+    font-size:36px;
+    font-weight:700;
+    margin-bottom:15px;
+}
+
+.success-card p{
+    color:#666;
+    font-size:18px;
+    margin-bottom:10px;
+}
+
+.order-box{
+    margin-top:35px;
+    text-align:left;
+    background:#fafafa;
+    border-radius:15px;
+    padding:25px;
+}
+
+.order-box .row{
+    align-items:center;
+}
+
+.order-box strong{
+    color:#333;
+}
+
+.success-buttons{
+    margin-top:40px;
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    flex-wrap:wrap;
+}
+
+.success-buttons .btn{
+    padding:12px 30px;
+    font-size:17px;
+    border-radius:8px;
+}
+
+@media(max-width:768px){
+
+.success-card{
+    padding:30px 20px;
+}
+
+.success-card h1{
+    font-size:28px;
+}
+
+.success-icon{
+    width:90px;
+    height:90px;
+    font-size:45px;
+}
+
+.success-buttons{
+    flex-direction:column;
+}
+
+.success-buttons .btn{
+    width:100%;
+}
+
+}

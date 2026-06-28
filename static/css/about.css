@@ -1,0 +1,182 @@
+.about-hero{
+
+    background:linear-gradient(rgba(0,0,0,.65),rgba(0,0,0,.65)),
+    url("../images/about-banner.jpg");
+
+    background-size:cover;
+
+    background-position:center;
+
+    padding:120px 0;
+
+    text-align:center;
+
+}
+
+.about-hero h1{
+
+    color:#fff;
+
+    font-size:55px;
+
+    font-weight:700;
+
+}
+
+.about-hero p{
+
+    color:#ddd;
+
+    font-size:20px;
+
+}
+
+.about-section{
+
+    background:#111;
+
+    padding:90px 0;
+
+}
+
+.about-image{
+
+    width:100%;
+
+    border-radius:20px;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.4);
+
+}
+
+.about-section h2{
+
+    color:#fff;
+
+    font-weight:700;
+
+    margin-bottom:20px;
+
+}
+
+.about-section p{
+
+    color:#bbb;
+
+    line-height:30px;
+
+}
+
+.why-us{
+
+    background:#181818;
+
+    padding:90px 0;
+
+}
+
+.why-us h2{
+
+    color:#fff;
+
+}
+
+.feature-box{
+
+    background:#222;
+
+    border-radius:20px;
+
+    padding:35px;
+
+    text-align:center;
+
+    transition:.3s;
+
+    height:100%;
+
+}
+
+.feature-box:hover{
+
+    transform:translateY(-10px);
+
+    box-shadow:0 10px 25px rgba(0,0,0,.5);
+
+}
+
+.feature-box i{
+
+    font-size:45px;
+
+    color:#ff3b30;
+
+    margin-bottom:20px;
+
+}
+
+.feature-box h4{
+
+    color:#fff;
+
+}
+
+.feature-box p{
+
+    color:#bbb;
+
+}
+
+.counter-section{
+
+    background:#ff3b30;
+
+    padding:70px 0;
+
+}
+
+.counter-section h2{
+
+    color:#fff;
+
+    font-size:42px;
+
+    font-weight:700;
+
+}
+
+.counter-section p{
+
+    color:#fff;
+
+    margin-top:10px;
+
+}
+
+@media(max-width:768px){
+
+.about-hero h1{
+
+font-size:38px;
+
+}
+
+.about-section{
+
+text-align:center;
+
+}
+
+.about-image{
+
+margin-bottom:30px;
+
+}
+
+.feature-box{
+
+margin-bottom:25px;
+
+}
+
+}

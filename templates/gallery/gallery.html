@@ -1,0 +1,68 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}
+Gallery | Malik Chicken Corner
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/gallery.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<section class="gallery-page">
+
+    <div class="container">
+
+        <div class="gallery-header">
+
+            <h1>📸 Our Gallery</h1>
+
+            <p>
+                Fresh Chicken • Delicious Food • Happy Customers
+            </p>
+
+        </div>
+
+        <!-- Featured Video -->
+
+        <div class="video-box">
+
+            <video controls autoplay muted loop>
+
+                <source
+                src="{{ url_for('static', filename='video/res.mp4') }}"
+                type="video/mp4">
+
+            </video>
+
+        </div>
+
+        <!-- Images -->
+
+        <div class="row g-4 mt-4">
+
+            {% for i in range(1,9) %}
+
+            <div class="col-lg-3 col-md-4 col-6">
+
+                <div class="gallery-card">
+
+                    <img
+                    src="{{ url_for('static', filename='images/gallery/gallery' ~ i ~ '.jpg') }}"
+                    alt="Gallery">
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

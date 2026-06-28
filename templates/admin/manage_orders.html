@@ -1,0 +1,109 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}
+Manage Orders
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/admin_orders.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<section class="admin-orders">
+
+<div class="container">
+
+<h2 class="mb-5">
+
+📦 Manage Orders
+
+</h2>
+
+{% if orders %}
+
+<table class="table table-bordered table-hover align-middle">
+
+<thead class="table-dark">
+
+<tr>
+
+<th>Order ID</th>
+
+<th>Customer</th>
+
+<th>Total</th>
+
+<th>Status</th>
+
+<th>Date</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+{% for order in orders %}
+
+<tr>
+
+<td>#{{ order.id }}</td>
+
+<td>{{ order.user.fullname }}</td>
+
+<td>₹{{ order.total_amount }}</td>
+
+<td>
+
+<span class="badge bg-warning text-dark">
+
+{{ order.status }}
+
+</span>
+
+</td>
+
+<td>
+
+{{ order.created_at.strftime("%d %b %Y") }}
+
+</td>
+
+<td>
+
+<a href="/admin/order/{{ order.id }}"
+class="btn btn-danger btn-sm">
+
+View
+
+</a>
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+{% else %}
+
+<div class="alert alert-info">
+
+No Orders Found
+
+</div>
+
+{% endif %}
+
+</div>
+
+</section>
+
+{% endblock %}

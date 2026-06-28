@@ -1,0 +1,96 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}
+Order Successful | Malik Chicken Corner
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/order_success.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<section class="success-section">
+
+    <div class="container">
+
+        <div class="success-card">
+
+            <div class="success-icon">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+
+            <h1>Order Placed Successfully!</h1>
+
+            <p>
+                Thank you for ordering from
+                <strong>Malik Chicken Corner</strong>.
+            </p>
+
+            <p>
+                Your delicious food is now being prepared.
+            </p>
+
+            <div class="order-box">
+
+                <div class="row">
+
+                    <div class="col-6">
+                        <strong>Order ID</strong>
+                    </div>
+
+                    <div class="col-6 text-end">
+                        #MC{{ order.id if order else "1001" }}
+                    </div>
+
+                </div>
+
+                <hr>
+
+                <div class="row">
+
+                    <div class="col-6">
+                        <strong>Status</strong>
+                    </div>
+
+                    <div class="col-6 text-end text-success">
+                        Preparing
+                    </div>
+
+                </div>
+
+                <hr>
+
+                <div class="row">
+
+                    <div class="col-6">
+                        <strong>Payment</strong>
+                    </div>
+
+                    <div class="col-6 text-end">
+                        Cash on Delivery
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="success-buttons">
+
+                <a href="/menu" class="btn btn-danger">
+                    Continue Shopping
+                </a>
+
+                <a href="/" class="btn btn-outline-dark">
+                    Back To Home
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

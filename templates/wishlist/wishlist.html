@@ -1,0 +1,111 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}
+Wishlist | Malik Chicken Corner
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/wishlist.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<section class="wishlist-header">
+
+    <div class="container text-center">
+
+        <h1>
+            <i class="fa-solid fa-heart text-danger"></i>
+            My Wishlist
+        </h1>
+
+        <p>Your favourite dishes saved for later.</p>
+
+    </div>
+
+</section>
+
+<section class="wishlist-section">
+
+    <div class="container">
+
+        {% if wishlist_items %}
+
+        <div class="row g-4">
+
+            {% for item in wishlist_items %}
+
+            <div class="col-lg-4 col-md-6">
+
+                <div class="wishlist-card">
+
+                    <img src="{{ url_for('static', filename=item.product.image) }}"
+                         alt="{{ item.product.name }}">
+
+                    <div class="wishlist-body">
+
+                        <h4>{{ item.product.name }}</h4>
+
+                        <p>{{ item.product.description }}</p>
+
+                        <h5 class="price">
+                            ₹{{ item.product.price }}
+                        </h5>
+
+                        <div class="wishlist-buttons">
+
+                            <a href="/add-to-cart/{{ item.product.id }}"
+                               class="btn btn-danger">
+
+                                <i class="fa-solid fa-cart-shopping"></i>
+                                Add To Cart
+
+                            </a>
+
+                            <a href="/wishlist/remove/{{ item.id }}"
+                               class="btn btn-outline-danger">
+
+                                <i class="fa-solid fa-trash"></i>
+                                Remove
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        {% else %}
+
+        <div class="empty-wishlist text-center">
+
+            <i class="fa-regular fa-heart"></i>
+
+            <h2>Your Wishlist is Empty</h2>
+
+            <p>
+                Save your favourite dishes here.
+            </p>
+
+            <a href="/menu" class="btn btn-danger">
+
+                Browse Menu
+
+            </a>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,332 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}Menu | Malik Chicken Corner{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/menu.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<div class="menu-page">
+
+    <section class="menu-header">
+
+        <div class="container">
+
+            <h1>Our Menu</h1>
+
+            <p>Fresh • Crispy • Delicious</p>
+
+        </div>
+
+    </section>
+
+<!-- ==========================
+        SEARCH & FILTER
+========================== -->
+
+<section class="menu-filter">
+
+    <div class="container">
+
+        <form action="/menu" method="GET">
+
+            <div class="row g-3 align-items-center">
+
+                <!-- Search -->
+
+                <div class="col-lg-5">
+
+                    <input
+                        type="text"
+                        class="form-control menu-input"
+                        name="search"
+                        placeholder="🔍 Search Chicken, Burger, Pizza..."
+                        value="{{ request.args.get('search','') }}">
+
+                </div>
+
+                <!-- Category -->
+
+                <div class="col-lg-3">
+
+                    <select
+                        class="form-select menu-select"
+                        name="category">
+
+                        <option value="">All Categories</option>
+
+                    {% for category in categories %}
+                    <option value="{{ category.id }}">
+                        {{ category.name }}
+                    </option>
+                    {% endfor %}
+
+                    </select>
+
+                </div>
+
+                <!-- Sort -->
+
+                <div class="col-lg-2">
+
+                    <select
+                        class="form-select menu-select"
+                        name="sort">
+
+                        <option value="">
+                            Sort By
+                        </option>
+
+                        <option value="low">
+                            Price : Low → High
+                        </option>
+
+                        <option value="high">
+                            Price : High → Low
+                        </option>
+
+                        <option value="new">
+                            Newest
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <!-- Search Button -->
+
+                <div class="col-lg-2">
+
+                    <button
+                        class="btn btn-danger menu-search-btn w-100">
+
+                        <i class="fa-solid fa-magnifying-glass"></i>
+
+                        Search
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</section>
+
+
+<!-- ==========================
+        PRODUCTS
+========================== -->
+<section class="products-section">
+
+    <div class="container">
+
+        <div class="section-title">
+            <h2>Popular Dishes</h2>
+            <p>Freshly prepared with premium ingredients</p>
+        </div>
+
+        <div class="row g-4">
+
+            {% if products.items %}
+
+                {% for product in products.items %}
+
+                <div class="col-xl-3 col-lg-4 col-md-6">
+
+                    <div class="product-card"
+                         onclick="window.location.href='{{ url_for('product_detail', product_id=product.id) }}'">
+
+                        <!-- Offer Badge -->
+                        <span class="offer-badge">
+                            10% OFF
+                        </span>
+
+                        <!-- Wishlist -->
+                        <a href="{{ url_for('add_to_wishlist', product_id=product.id) }}"
+                           class="wishlist-btn"
+                           onclick="event.stopPropagation();">
+
+                            <i class="fa-solid fa-heart"></i>
+
+                        </a>
+
+                        <!-- Product Image -->
+                        <div class="product-image">
+
+                            {% if product.image %}
+                            <img src="{{ url_for('static', filename=product.image) }}"
+                                 alt="{{ product.name }}">
+                            {% else %}
+                            <img src="{{ url_for('static', filename='images/placeholder.png') }}"
+                                 alt="No Image">
+                            {% endif %}
+
+                        </div>
+
+                        <!-- Product Body -->
+                        <div class="product-body">
+
+                            <span class="category-badge">
+                                {{ product.category.name if product.category else "Chicken" }}
+                            </span>
+
+                            <h4>{{ product.name }}</h4>
+
+                            <p>{{ product.description }}</p>
+
+                            <div class="rating">
+                                ⭐⭐⭐⭐⭐
+                            </div>
+
+                            <div class="price-box">
+
+                                <span class="price">
+                                    ₹{{ product.price }}
+                                </span>
+
+                                <span class="old-price">
+                                    ₹999
+                                </span>
+
+                            </div>
+
+                            <div class="product-buttons">
+
+                                <a href="{{ url_for('add_to_cart', product_id=product.id) }}"
+                                   class="btn btn-outline-danger"
+                                   onclick="event.stopPropagation();">
+
+                                    <i class="fa-solid fa-cart-plus"></i>
+                                    Cart
+
+                                </a>
+
+                                <a href="{{ url_for('product_detail', product_id=product.id) }}"
+                                   class="btn btn-danger"
+                                   onclick="event.stopPropagation();">
+
+                                    Buy Now
+
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+            {% else %}
+
+                <div class="col-12">
+
+                    <div class="no-products">
+
+                        <img src="{{ url_for('static', filename='images/no-product.png') }}"
+                             width="220">
+
+                        <h3>No Products Found</h3>
+
+                        <p>
+                            Products added from Admin Panel will appear here.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- Pagination -->
+
+{% if products.pages > 1 %}
+
+<nav class="mt-5">
+
+    <ul class="pagination justify-content-center">
+
+        {% if products.has_prev %}
+
+        <li class="page-item">
+
+            <a class="page-link"
+               href="{{ url_for('menu',
+                    page=products.prev_num,
+                    search=request.args.get('search'),
+                    category=request.args.get('category'),
+                    sort=request.args.get('sort')) }}">
+
+                Previous
+
+            </a>
+
+        </li>
+
+        {% endif %}
+
+        {% for page in products.iter_pages() %}
+
+            {% if page %}
+
+            <li class="page-item {% if page == products.page %}active{% endif %}">
+
+                <a class="page-link"
+                   href="{{ url_for('menu',
+                        page=page,
+                        search=request.args.get('search'),
+                        category=request.args.get('category'),
+                        sort=request.args.get('sort')) }}">
+
+                    {{ page }}
+
+                </a>
+
+            </li>
+
+            {% endif %}
+
+        {% endfor %}
+
+        {% if products.has_next %}
+
+        <li class="page-item">
+
+            <a class="page-link"
+               href="{{ url_for('menu',
+                    page=products.next_num,
+                    search=request.args.get('search'),
+                    category=request.args.get('category'),
+                    sort=request.args.get('sort')) }}">
+
+                Next
+
+            </a>
+
+        </li>
+
+        {% endif %}
+
+    </ul>
+
+</nav>
+
+{% endif %}
+
+{% endblock %}

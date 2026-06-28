@@ -1,0 +1,172 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}
+My Orders | Malik Chicken Corner
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/my_orders.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<!-- ==========================
+        PAGE HEADER
+========================== -->
+
+<section class="orders-banner">
+
+    <div class="container text-center">
+
+        <h1>
+            <i class="fa-solid fa-box-open"></i>
+            My Orders
+        </h1>
+
+        <p>
+            View all your recent chicken orders.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- ==========================
+        ORDERS
+========================== -->
+
+<section class="orders-section">
+
+<div class="container">
+
+{% if orders %}
+
+    {% for order in orders %}
+
+    <div class="order-card">
+
+        <div class="row align-items-center">
+
+            <!-- Order Info -->
+
+            <div class="col-lg-3 col-md-6 mb-3 mb-lg-0">
+
+                <h5 class="order-id">
+                    Order #{{ order.id }}
+                </h5>
+
+                <small class="order-date">
+
+                    {% if order.created_at %}
+                        {{ order.created_at.strftime('%d %b %Y') }}
+                    {% else %}
+                        Date Not Available
+                    {% endif %}
+
+                </small>
+
+            </div>
+
+
+            <!-- Price -->
+
+            <div class="col-lg-3 col-md-6 mb-3 mb-lg-0">
+
+                <div class="price">
+                    ₹{{ order.total_amount }}
+                </div>
+
+            </div>
+
+
+            <!-- Status -->
+
+            <div class="col-lg-3 col-md-6 mb-3 mb-lg-0">
+
+                {% if order.status == "Delivered" %}
+
+                    <span class="status delivered">
+                        Delivered
+                    </span>
+
+                {% elif order.status == "Pending" %}
+
+                    <span class="status pending">
+                        Pending
+                    </span>
+
+                {% elif order.status == "Preparing" %}
+
+                    <span class="status preparing">
+                        Preparing
+                    </span>
+
+                {% elif order.status == "Cancelled" %}
+
+                    <span class="status cancelled">
+                        Cancelled
+                    </span>
+
+                {% else %}
+
+                    <span class="status">
+                        {{ order.status }}
+                    </span>
+
+                {% endif %}
+
+            </div>
+
+
+            <!-- Button -->
+
+            <div class="col-lg-3 col-md-6 text-lg-end">
+
+                <a href="{{ url_for('order_details', order_id=order.id) }}"
+                   class="btn btn-danger">
+
+                    <i class="fa-solid fa-eye"></i>
+
+                    View Details
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    {% endfor %}
+
+{% else %}
+
+<div class="empty-orders text-center">
+
+    <i class="fa-solid fa-box-open fa-4x mb-3"></i>
+
+    <h2>No Orders Yet</h2>
+
+    <p>
+        Looks like you haven't placed any order yet.
+    </p>
+
+    <a href="{{ url_for('menu') }}"
+       class="btn btn-danger">
+
+        <i class="fa-solid fa-utensils"></i>
+
+        Order Now
+
+    </a>
+
+</div>
+
+{% endif %}
+
+</div>
+
+</section>
+
+{% endblock %}
