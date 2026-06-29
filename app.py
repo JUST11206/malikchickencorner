@@ -570,10 +570,18 @@ def checkout():
     )
 
 #Order Success route
+@app.route("/order-success/<int:order_id>")
+def order_success(order_id):
 
-@app.route("/order-success")
-def order_success():
-    return render_template("order/order_success.html")
+    if "user_id" not in session:
+        return redirect("/login")
+
+    order = Order.query.get_or_404(order_id)
+
+    return render_template(
+        "order/order_success.html",
+        order=order
+    )
 
 
 # ==========================
@@ -695,7 +703,7 @@ def order_details(order_id):
 # Place Order
 # ==========================
 
-@app.route("/place-order")
+@app.route("/place-order" , methods =["POST"])
 def place_order():
 
     if "user_id" not in session:
@@ -750,7 +758,7 @@ def place_order():
 
     db.session.commit()
 
-    return redirect("/order-success")
+    return redirect(url_for("order_success", order_id=order.id))
 
 
 

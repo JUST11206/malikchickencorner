@@ -11,57 +11,327 @@ href="{{ url_for('static', filename='css/gallery.css') }}">
 
 {% block content %}
 
-<section class="gallery-page">
+<!-- HERO -->
 
-    <div class="container">
+<section class="gallery-hero">
 
-        <div class="gallery-header">
+    <div class="container text-center">
 
-            <h1>📸 Our Gallery</h1>
+        <h1> Our Gallery</h1>
 
-            <p>
-                Fresh Chicken • Delicious Food • Happy Customers
-            </p>
-
-        </div>
-
-        <!-- Featured Video -->
-
-        <div class="video-box">
-
-            <video controls autoplay muted loop>
-
-                <source
-                src="{{ url_for('static', filename='video/res.mp4') }}"
-                type="video/mp4">
-
-            </video>
-
-        </div>
-
-        <!-- Images -->
-
-        <div class="row g-4 mt-4">
-
-            {% for i in range(1,9) %}
-
-            <div class="col-lg-3 col-md-4 col-6">
-
-                <div class="gallery-card">
-
-                    <img
-                    src="{{ url_for('static', filename='images/gallery/gallery' ~ i ~ '.jpg') }}"
-                    alt="Gallery">
-
-                </div>
-
-            </div>
-
-            {% endfor %}
-
-        </div>
+        <p>
+            Fresh Chicken • Delicious Food • Happy Customers
+        </p>
 
     </div>
+
+</section>
+
+<!-- FEATURE VIDEO -->
+
+<section class="featured-video">
+
+<div class="container">
+
+<div class="section-title">
+
+<h2>Restaurant Experience</h2>
+
+<p>
+See how we prepare fresh food every day.
+</p>
+
+</div>
+
+<div class="video-card">
+
+<video controls autoplay muted loop>
+
+<source
+src="{{ url_for('static', filename='video/bg2.mp4') }}"
+type="video/mp4">
+
+</video>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- RESTAURANT -->
+
+<section class="gallery-section">
+
+<div class="container">
+
+<div class="section-title">
+
+<h2> Restaurant</h2>
+
+<p>Beautiful ambience</p>
+
+</div>
+
+<div class="row g-4">
+
+<div class="col-lg-4 col-md-6">
+
+<div class="gallery-card">
+
+<img src="{{ url_for('static', filename='images/gallery/restaurant1.jpg') }}">
+
+<div class="gallery-overlay">
+
+<h5>Restaurant View</h5>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-lg-4 col-md-6">
+
+<div class="gallery-card">
+
+<img src="{{ url_for('static', filename='images/gallery/restaurant2.jpg') }}">
+
+<div class="gallery-overlay">
+
+<h5>Dining Area</h5>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-lg-4 col-md-6">
+
+<div class="gallery-card">
+
+<img src="{{ url_for('static', filename='images/gallery/restaurant3.jpg') }}">
+
+<div class="gallery-overlay">
+
+<h5>Family Seating</h5>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- FOOD -->
+
+<section class="gallery-section">
+
+<div class="container">
+
+<div class="section-title">
+
+<h2>🔥 Signature Dishes</h2>
+
+<p>Our Delicious Food</p>
+
+</div>
+
+<div class="row g-4">
+
+<div class="col-lg-4 col-md-6">
+<div class="gallery-card">
+<img src="{{ url_for('static', filename='images/gallery/food1.jpg') }}">
+</div>
+</div>
+
+<div class="col-lg-4 col-md-6">
+<div class="gallery-card">
+<img src="{{ url_for('static', filename='images/gallery/food2.jpg') }}">
+</div>
+</div>
+
+<div class="col-lg-4 col-md-6">
+<div class="gallery-card">
+<img src="{{ url_for('static', filename='images/gallery/food3.jpg') }}">
+</div>
+</div>
+
+<div class="col-lg-4 col-md-6">
+<div class="gallery-card">
+<img src="{{ url_for('static', filename='images/gallery/food4.jpg') }}">
+</div>
+</div>
+
+<div class="col-lg-4 col-md-6">
+<div class="gallery-card">
+<img src="{{ url_for('static', filename='images/gallery/food5.jpg') }}">
+</div>
+</div>
+
+<div class="col-lg-4 col-md-6">
+<div class="gallery-card">
+<img src="{{ url_for('static', filename='images/gallery/food6.jpg') }}">
+</div>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- HAPPY CUSTOMERS -->
+
+<section class="gallery-section">
+
+<div class="container">
+
+<div class="section-title">
+
+<h2>❤️ Happy Customers</h2>
+
+<p>Our valuable customers enjoying food</p>
+
+</div>
+
+<div class="row g-4">
+
+<div class="col-lg-4">
+
+<div class="gallery-card">
+
+<img src="{{ url_for('static', filename='images/gallery/customer1.jpg') }}">
+
+</div>
+
+</div>
+
+<div class="col-lg-4">
+
+<div class="gallery-card">
+
+<img src="{{ url_for('static', filename='images/gallery/customer2.jpg') }}">
+
+</div>
+
+</div>
+
+<div class="col-lg-4">
+
+<div class="gallery-card">
+
+<img src="{{ url_for('static', filename='images/gallery/customer3.jpg') }}">
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- KITCHEN VIDEOS -->
+
+<section class="gallery-section">
+
+<div class="container">
+
+<div class="section-title">
+
+<h2>👨‍🍳 Kitchen Videos</h2>
+
+<p>Watch our chefs preparing delicious food.</p>
+
+</div>
+
+<div class="row g-4">
+
+<div class="col-lg-4">
+
+<div class="video-small-card">
+
+<video controls>
+
+<source
+src="{{ url_for('static', filename='video/kitchen1.mp4') }}"
+type="video/mp4">
+
+</video>
+
+<h5>Fresh Preparation</h5>
+
+</div>
+
+</div>
+
+<div class="col-lg-4">
+
+<div class="video-small-card">
+
+<video controls>
+
+<source
+src="{{ url_for('static', filename='video/kitchen2.mp4') }}"
+type="video/mp4">
+
+</video>
+
+<h5>Cooking Process</h5>
+
+</div>
+
+</div>
+
+<div class="col-lg-4">
+
+<div class="video-small-card">
+
+<video controls>
+
+<source
+src="{{ url_for('static', filename='video/kitchen3.mp4') }}"
+type="video/mp4">
+
+</video>
+
+<h5>Serving Hot Food</h5>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- CTA -->
+
+<section class="gallery-cta">
+
+<div class="container text-center">
+
+<h2>Ready To Taste?</h2>
+
+<p>Fresh • Hygienic • Delicious</p>
+
+<a href="{{ url_for('menu') }}" class="btn btn-danger btn-lg">
+
+Order Now
+
+</a>
+
+</div>
 
 </section>
 

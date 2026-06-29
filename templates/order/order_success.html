@@ -1,95 +1,146 @@
 {% extends 'layout/base.html' %}
 
 {% block title %}
-Order Successful | Malik Chicken Corner
+Order Successful
 {% endblock %}
 
 {% block css %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/order_success.css') }}">
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/order_success.css') }}">
 {% endblock %}
 
 {% block content %}
 
 <section class="success-section">
 
-    <div class="container">
+<div class="container">
 
-        <div class="success-card">
+<div class="success-card">
 
-            <div class="success-icon">
-                <i class="fa-solid fa-circle-check"></i>
-            </div>
+<div class="success-icon">
 
-            <h1>Order Placed Successfully!</h1>
+<i class="fa-solid fa-circle-check"></i>
 
-            <p>
-                Thank you for ordering from
-                <strong>Malik Chicken Corner</strong>.
-            </p>
+</div>
 
-            <p>
-                Your delicious food is now being prepared.
-            </p>
+<h1>
 
-            <div class="order-box">
+🎉 Order Placed Successfully!
 
-                <div class="row">
+</h1>
 
-                    <div class="col-6">
-                        <strong>Order ID</strong>
-                    </div>
+<p>
 
-                    <div class="col-6 text-end">
-                        #MC{{ order.id if order else "1001" }}
-                    </div>
+Thank you for ordering from
+<strong>Malik Chicken Corner</strong>
 
-                </div>
+</p>
 
-                <hr>
+<p>
 
-                <div class="row">
+Your delicious food is now being prepared.
 
-                    <div class="col-6">
-                        <strong>Status</strong>
-                    </div>
+</p>
 
-                    <div class="col-6 text-end text-success">
-                        Preparing
-                    </div>
+<div class="order-box">
 
-                </div>
+<div class="row mb-3">
 
-                <hr>
+<div class="col-6">
 
-                <div class="row">
+<strong>Order ID</strong>
 
-                    <div class="col-6">
-                        <strong>Payment</strong>
-                    </div>
+</div>
 
-                    <div class="col-6 text-end">
-                        Cash on Delivery
-                    </div>
+<div class="col-6 text-end">
 
-                </div>
+#MC{{ order.id }}
 
-            </div>
+</div>
 
-            <div class="success-buttons">
+</div>
 
-                <a href="/menu" class="btn btn-danger">
-                    Continue Shopping
-                </a>
+<hr>
 
-                <a href="/" class="btn btn-outline-dark">
-                    Back To Home
-                </a>
+<div class="row mb-3">
 
-            </div>
+<div class="col-6">
 
-        </div>
+<strong>Status</strong>
 
-    </div>
+</div>
+
+<div class="col-6 text-end">
+
+<span class="badge bg-warning">
+
+{{ order.status }}
+
+</span>
+
+</div>
+
+</div>
+
+<hr>
+
+<div class="row mb-3">
+
+<div class="col-6">
+
+<strong>Payment Method</strong>
+
+</div>
+
+<div class="col-6 text-end">
+
+{{ order.payment_method }}
+
+</div>
+
+</div>
+
+<hr>
+
+<div class="row mb-3">
+
+<div class="col-6">
+
+<strong>Total Amount</strong>
+
+</div>
+
+<div class="col-6 text-end">
+
+₹{{ order.total_amount }}
+
+</div>
+
+</div>
+
+</div>
+
+<div class="success-buttons">
+
+<a href="{{ url_for('menu') }}"
+class="btn btn-danger">
+
+Continue Shopping
+
+</a>
+
+<a href="{{ url_for('home') }}"
+class="btn btn-outline-dark">
+
+Back To Home
+
+</a>
+
+</div>
+
+</div>
+
+</div>
 
 </section>
 

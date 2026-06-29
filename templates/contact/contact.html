@@ -36,62 +36,67 @@ Contact Us | Malik Chicken Corner
 
                     <h2>Send us a Message</h2>
 
-                    <form>
+                   <form id="whatsappForm">
 
-                        <div class="mb-3">
+    <div class="mb-3">
 
-                            <label>Your Name</label>
+        <label>Your Name</label>
 
-                            <input
-                                type="text"
-                                class="form-control"
-                                placeholder="Enter your name">
+        <input
+            type="text"
+            id="name"
+            class="form-control"
+            placeholder="Enter your name"
+            required>
 
-                        </div>
+    </div>
 
-                        <div class="mb-3">
+    <div class="mb-3">
 
-                            <label>Email Address</label>
+        <label>Email Address</label>
 
-                            <input
-                                type="email"
-                                class="form-control"
-                                placeholder="Enter your email">
+        <input
+            type="email"
+            id="email"
+            class="form-control"
+            placeholder="Enter your email">
 
-                        </div>
+    </div>
 
-                        <div class="mb-3">
+    <div class="mb-3">
 
-                            <label>Phone Number</label>
+        <label>Phone Number</label>
 
-                            <input
-                                type="text"
-                                class="form-control"
-                                placeholder="Enter phone number">
+        <input
+            type="text"
+            id="phone"
+            class="form-control"
+            placeholder="Enter phone number"
+            required>
 
-                        </div>
+    </div>
 
-                        <div class="mb-3">
+    <div class="mb-3">
 
-                            <label>Message</label>
+        <label>Message</label>
 
-                            <textarea
-                                rows="6"
-                                class="form-control"
-                                placeholder="Write your message..."></textarea>
+        <textarea
+            rows="6"
+            id="message"
+            class="form-control"
+            placeholder="Write your message..."
+            required></textarea>
 
-                        </div>
+    </div>
+<button
+    type="button"
+    onclick="sendWhatsApp()"
+    class="contact-btn">
 
-                        <button class="btn btn-danger btn-lg">
+    Send Message
 
-                            <i class="fa-solid fa-paper-plane"></i>
-
-                            Send Message
-
-                        </button>
-
-                    </form>
-
+</button>
+</form>
                 </div>
 
             </div>
@@ -192,4 +197,37 @@ Contact Us | Malik Chicken Corner
     </iframe>
 </div>
 
+<script>
+
+function sendWhatsApp(){
+
+    let name=document.getElementById("name").value;
+    let email=document.getElementById("email").value;
+    let phone=document.getElementById("phone").value;
+    let message=document.getElementById("message").value;
+
+    if(name=="" || phone=="" || message==""){
+        alert("Please fill all required fields.");
+        return;
+    }
+
+    let text =
+`🍗 *New Contact Message*
+
+👤 Name : ${name}
+
+📞 Phone : ${phone}
+
+📧 Email : ${email}
+
+💬 Message :
+${message}`;
+
+    let whatsapp="https://wa.me/919149168080?text="+encodeURIComponent(text);
+
+    window.open(whatsapp,"_blank");
+
+}
+
+</script>
 {% endblock %}

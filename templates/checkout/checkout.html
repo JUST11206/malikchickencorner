@@ -123,11 +123,9 @@ required></textarea>
 type="text"
 name="city"
 class="form-control"
-placeholder="City"
-required>
-
+value="Baraut"
+readonly>
 </div>
-
 <div class="col-md-6 mb-3">
 
 <label>Pincode</label>
@@ -136,80 +134,36 @@ required>
 type="text"
 name="pincode"
 class="form-control"
-placeholder="Pincode"
-required>
-
+value="250611"
+readonly>
 </div>
 
 </div>
 
 <!-- Payment -->
 
-<div class="payment-method">
-
-<h5>
-
-Choose Payment Method
-
-</h5>
-
-<div class="payment-option">
-
-<label>
-
-<input
-type="radio"
-name="payment"
-value="COD"
-checked>
-
-Cash On Delivery
-
+<label class="payment-option" for="cod">
+    <input type="radio" id="cod" name="payment" value="COD" checked>
+    <strong>Cash on Delivery</strong>
 </label>
 
-</div>
-
-<div class="payment-option">
-
-<label>
-
-<input
-type="radio"
-name="payment"
-value="UPI">
-
-UPI Payment
-
+<label class="payment-option" for="upi">
+    <input type="radio" id="upi" name="payment" value="UPI">
+    <strong>UPI Payment</strong>
 </label>
 
-</div>
-
-<div class="payment-option">
-
-<label>
-
-<input
-type="radio"
-name="payment"
-value="CARD">
-
-Debit / Credit Card
-
+<label class="payment-option" for="card">
+    <input type="radio" id="card" name="payment" value="CARD">
+    <strong>Debit / Credit Card</strong>
 </label>
 
-</div>
-
-</div>
 
 <button
-type="submit"
-class="btn btn-danger place-order">
-<a href="{{ url_for('place_order') }}"
-class="btn btn-danger btn-lg w-100">
+    type="submit"
+    class="btn btn-danger btn-lg w-100 place-order">
 
-Place Order
+    Place Order
 
-</a>
 </button>
 
 </form>
@@ -299,7 +253,7 @@ Discount
 
 <span>
 
--₹100
+-₹60
 
 </span>
 
@@ -317,7 +271,7 @@ Grand Total
 
 <span>
 
-₹{{ total + 50 - 100 }}
+₹{{ total + 50 - 60 }}
 
 </span>
 
