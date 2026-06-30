@@ -16,15 +16,12 @@ href="{{ url_for('static', filename='css/order_details.css') }}">
     <div class="container">
 
         <h1>
-
             Order #{{ order.id }}
-
         </h1>
 
         <p>
-
-            Thank you for shopping with Malik Chicken Corner
-
+            Thank you for shopping with
+            <strong>Malik Chicken Corner</strong>
         </p>
 
     </div>
@@ -35,6 +32,10 @@ href="{{ url_for('static', filename='css/order_details.css') }}">
 
 <div class="container">
 
+<!-- ==========================
+ORDER INFO
+========================== -->
+
 <div class="order-info">
 
 <div class="row">
@@ -44,9 +45,7 @@ href="{{ url_for('static', filename='css/order_details.css') }}">
 <h5>Order Date</h5>
 
 <p>
-
 {{ order.created_at.strftime('%d %B %Y') }}
-
 </p>
 
 </div>
@@ -55,17 +54,21 @@ href="{{ url_for('static', filename='css/order_details.css') }}">
 
 <h5>Status</h5>
 
-<span class="status">
+<p>
+
+<span class="badge bg-warning">
 
 {{ order.status }}
 
 </span>
 
+</p>
+
 </div>
 
 <div class="col-md-4">
 
-<h5>Total</h5>
+<h5>Total Amount</h5>
 
 <h3>
 
@@ -78,6 +81,119 @@ href="{{ url_for('static', filename='css/order_details.css') }}">
 </div>
 
 </div>
+
+<!-- ==========================
+LIVE ORDER TRACKING
+========================== -->
+<!-- ==========================
+LIVE ORDER TRACKING
+========================== -->
+
+<div class="tracking-card mt-5">
+
+    <h3 class="mb-4">
+        Live Order Tracking
+    </h3>
+
+    <div class="timeline">
+
+        <!-- Order Placed -->
+        <div class="timeline-step active">
+            <div class="circle">✓</div>
+
+            <div class="label">
+                <strong>Order Placed</strong>
+
+                <small>
+                    {{ order.created_at.strftime('%d %b %Y') }}
+                    <br>
+                    {{ order.created_at.strftime('%I:%M %p') }}
+                </small>
+            </div>
+        </div>
+
+        <!-- Confirmed -->
+        <div class="timeline-step {% if order.confirmed_at %}active{% endif %}">
+            <div class="circle">✓</div>
+
+            <div class="label">
+                <strong>Confirmed</strong>
+
+                {% if order.confirmed_at %}
+                    <small>
+                        {{ order.confirmed_at.strftime('%d %b %Y') }}
+                        <br>
+                        {{ order.confirmed_at.strftime('%I:%M %p') }}
+                    </small>
+                {% else %}
+                    <small>Waiting...</small>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Preparing -->
+         <!-- Preparing -->
+<div class="timeline-step {% if order.preparing_at %}active{% endif %}">
+    <div class="circle">✓</div>
+
+    <div class="label">
+        <strong>Preparing</strong>
+
+        {% if order.preparing_at %}
+            <small>
+                {{ order.preparing_at.strftime('%d %b %Y') }}
+                <br>
+                {{ order.preparing_at.strftime('%I:%M %p') }}
+            </small>
+        {% else %}
+            <small>Waiting...</small>
+        {% endif %}
+    </div>
+</div>
+        <!-- Out For Delivery -->
+        <div class="timeline-step {% if order.out_for_delivery_at %}active{% endif %}">
+            <div class="circle">✓</div>
+
+            <div class="label">
+                <strong>Out For Delivery</strong>
+
+                {% if order.out_for_delivery_at %}
+                    <small>
+                        {{ order.out_for_delivery_at.strftime('%d %b %Y') }}
+                        <br>
+                        {{ order.out_for_delivery_at.strftime('%I:%M %p') }}
+                    </small>
+                {% else %}
+                    <small>Waiting...</small>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Delivered -->
+        <div class="timeline-step {% if order.delivered_at %}active{% endif %}">
+            <div class="circle">✓</div>
+
+            <div class="label">
+                <strong>Delivered</strong>
+
+                {% if order.delivered_at %}
+                    <small>
+                        {{ order.delivered_at.strftime('%d %b %Y') }}
+                        <br>
+                        {{ order.delivered_at.strftime('%I:%M %p') }}
+                    </small>
+                {% else %}
+                    <small>Waiting...</small>
+                {% endif %}
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<!-- ==========================
+ORDER ITEMS
+========================== -->
 
 <h2 class="mt-5 mb-4">
 
@@ -165,7 +281,7 @@ Total
 
 <div class="text-center mt-5">
 
-<a href="/my-orders"
+<a href="{{ url_for('my_orders') }}"
 class="btn btn-danger">
 
 ← Back To My Orders
@@ -177,5 +293,4 @@ class="btn btn-danger">
 </div>
 
 </section>
-
 {% endblock %}

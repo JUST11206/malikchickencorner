@@ -218,10 +218,21 @@ class Order(db.Model):
         default=datetime.utcnow
     )
 
+    confirmed_at = db.Column(db.DateTime)
+
+    preparing_at = db.Column(db.DateTime)
+
+    out_for_delivery_at = db.Column(db.DateTime)
+
+    delivered_at = db.Column(db.DateTime)
+
+    cancelled_at = db.Column(db.DateTime)
+
     user = db.relationship(
         "User",
         backref="orders"
     )
+    
 # ==========================
 # Order Item Model
 # ==========================
@@ -284,6 +295,10 @@ class Payment(db.Model):
     db.DateTime,
     default=datetime.utcnow
 )
+    order = db.relationship(
+    "Order",
+    backref="payment"
+)
 
 
 # ==========================
@@ -308,3 +323,37 @@ class Review(db.Model):
 )
 
     comment = db.Column(db.Text)
+
+# ==========================
+# Order Timeline Model
+# ==========================
+
+class OrderTimeline(db.Model):
+
+    __tablename__ = "order_timeline"
+
+    id = db.Column(
+        db.Integer,
+        primary_key=True
+    )
+
+    order_id = db.Column(
+        db.Integer,
+        db.ForeignKey("orders.id"),
+        nullable=False
+    )
+
+    title = db.Column(
+        db.String(150),
+        nullable=False
+    )
+
+    created_at = db.Column(
+        db.DateTime,
+        default=datetime.utcnow
+    )
+
+    order = db.relationship(
+        "Order",
+        backref="timeline"
+    )

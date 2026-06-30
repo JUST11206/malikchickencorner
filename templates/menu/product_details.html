@@ -95,32 +95,86 @@ Out of Stock
 
 {% endif %}
 
-<div class="quantity mt-4">
+<form id="productForm" method="GET">
 
-<label>
+    <div class="quantity mt-4">
 
-Quantity
+        <label class="mb-2 d-block">
+            Quantity
+        </label>
 
-</label>
+        <div class="qty-box">
 
-<input
-type="number"
-min="1"
-value="1">
+            <button type="button" id="minus">
+                -
+            </button>
 
-</div>
+            <span id="qty-text">1</span>
 
-<div class="buttons mt-4">
-<a href="{{ url_for('add_to_cart', product_id=product.id) }}"
-   class="btn btn-danger">
-    <i class="fa-solid fa-cart-shopping"></i>
-    Add To Cart
-</a>
-<a href="{{ url_for('checkout') }}" class="btn btn-danger">
-    Buy Now
-</a>
-</div>
+            <button type="button" id="plus">
+                +
+            </button>
 
+        </div>
+
+        <input
+            type="hidden"
+            id="quantity"
+            name="qty"
+            value="1">
+
+    </div>
+
+    <div class="buttons mt-4 d-flex gap-3">
+
+        <button
+            type="submit"
+            formaction="{{ url_for('add_to_cart', product_id=product.id) }}"
+            class="btn btn-danger">
+
+            <i class="fa-solid fa-cart-shopping"></i>
+
+            Add To Cart
+
+        </button>
+
+        <button
+            type="submit"
+            formaction="{{ url_for('buy_now', product_id=product.id) }}"
+            class="btn btn-outline-danger">
+
+            Buy Now
+
+        </button>
+
+    </div>
+
+</form>
+
+<script>
+
+const qtyInput = document.getElementById("quantity");
+const qtyText = document.getElementById("qty-text");
+
+document.getElementById("plus").onclick = function(){
+
+    qtyInput.value = parseInt(qtyInput.value) + 1;
+    qtyText.innerText = qtyInput.value;
+
+}
+
+document.getElementById("minus").onclick = function(){
+
+    if(parseInt(qtyInput.value) > 1){
+
+        qtyInput.value = parseInt(qtyInput.value) - 1;
+        qtyText.innerText = qtyInput.value;
+
+    }
+
+}
+
+</script>
 </div>
 
 </div>

@@ -3,300 +3,200 @@
 ========================================== */
 
 body{
-    background:#111;
+    background:#0f0f0f;
     font-family:'Poppins',sans-serif;
 }
-
-/* ==========================================
-   SECTION
-========================================== */
 
 .success-section{
     min-height:100vh;
     display:flex;
-    align-items:center;
     justify-content:center;
+    align-items:center;
     padding:120px 15px 70px;
 }
 
-/* ==========================================
-   CARD
-========================================== */
-
 .success-card{
-
-    max-width:700px;
-
     width:100%;
-
-    background:#1b1b1b;
-
+    max-width:760px;
+    background:#1d1d1d;
     border-radius:22px;
-
     padding:45px;
-
     text-align:center;
-
-    box-shadow:0 18px 45px rgba(0,0,0,.45);
-
     border:1px solid rgba(255,255,255,.08);
-
+    box-shadow:0 20px 50px rgba(0,0,0,.45);
 }
 
-/* ==========================================
-   ICON
-========================================== */
+/* ICON */
 
 .success-icon{
-
     width:110px;
-
     height:110px;
-
     margin:auto;
-
     border-radius:50%;
-
     background:#16a34a;
-
     display:flex;
-
-    align-items:center;
-
     justify-content:center;
-
+    align-items:center;
     margin-bottom:25px;
-
     box-shadow:0 0 30px rgba(22,163,74,.35);
-
 }
 
 .success-icon i{
-
-    font-size:58px;
-
     color:#fff;
-
+    font-size:58px;
 }
 
-/* ==========================================
-   TEXT
-========================================== */
+/* TITLE */
 
 .success-card h1{
-
     color:#fff;
-
-    font-size:34px;
-
+    font-size:36px;
     font-weight:700;
-
     margin-bottom:12px;
-
 }
 
 .success-card p{
-
-    color:#cfcfcf;
-
+    color:#d2d2d2;
     font-size:17px;
-
     margin-bottom:8px;
-
 }
 
 .success-card strong{
-
-    color:#ff4444;
-
+    color:#ff4b4b;
 }
 
-/* ==========================================
-   ORDER BOX
-========================================== */
+/* ORDER BOX */
 
 .order-box{
-
     margin-top:35px;
-
-    background:#262626;
-
-    border-radius:15px;
-
-    padding:28px;
-
+    background:#2a2a2a;
+    border-radius:18px;
+    padding:30px;
     text-align:left;
-
 }
 
 .order-box .row{
-
     align-items:center;
-
 }
 
 .order-box strong{
-
     color:#fff;
-
 }
 
 .order-box hr{
-
-    border-color:#444;
-
-    margin:16px 0;
-
+    border-color:#3d3d3d;
+    margin:18px 0;
 }
 
 .order-box .text-end{
-
-    color:#f5f5f5;
-
+    color:#fff;
     font-weight:600;
-
+    font-size:16px;
 }
 
-/* ==========================================
-   BADGE
-========================================== */
+/* BADGES */
 
 .badge{
-
-    padding:8px 18px;
-
-    border-radius:30px;
-
+    padding:8px 20px;
+    border-radius:40px;
     font-size:13px;
-
     font-weight:600;
-
 }
 
 .bg-warning{
-
     background:#ffc107!important;
-
     color:#111!important;
-
 }
 
-/* ==========================================
-   BUTTONS
-========================================== */
+.payment-badge{
+    display:inline-block;
+    background:#2563eb;
+    color:white;
+    padding:8px 18px;
+    border-radius:30px;
+    font-size:13px;
+    font-weight:600;
+}
+
+.payment-cod{
+    background:#198754;
+}
+
+.payment-upi{
+    background:#0d6efd;
+}
+
+/* BUTTONS */
 
 .success-buttons{
-
+    margin-top:40px;
     display:flex;
-
     justify-content:center;
-
     gap:18px;
-
-    margin-top:35px;
-
     flex-wrap:wrap;
-
 }
 
 .success-buttons .btn{
-
     min-width:220px;
-
-    padding:13px 25px;
-
+    padding:14px 28px;
     border-radius:40px;
-
     font-weight:600;
-
     transition:.3s;
-
 }
 
 .success-buttons .btn-danger{
-
     background:#d90429;
-
     border:none;
-
 }
 
 .success-buttons .btn-danger:hover{
-
-    background:#ff2b45;
-
+    background:#ff2646;
     transform:translateY(-3px);
-
 }
 
 .success-buttons .btn-outline-dark{
-
     color:#fff;
-
     border:2px solid #666;
-
     background:transparent;
-
 }
 
 .success-buttons .btn-outline-dark:hover{
-
     background:#fff;
-
     color:#111;
-
     transform:translateY(-3px);
-
 }
 
-/* ==========================================
-   RESPONSIVE
-========================================== */
+/* RESPONSIVE */
 
 @media(max-width:768px){
 
 .success-card{
-
-    padding:30px 22px;
-
+    padding:30px 20px;
 }
 
 .success-card h1{
-
     font-size:28px;
-
 }
 
 .success-icon{
-
     width:90px;
-
     height:90px;
-
 }
 
 .success-icon i{
-
-    font-size:48px;
-
+    font-size:46px;
 }
 
 .order-box{
-
     padding:20px;
-
 }
 
 .success-buttons{
-
     flex-direction:column;
-
 }
 
 .success-buttons .btn{
-
     width:100%;
-
 }
 
 }

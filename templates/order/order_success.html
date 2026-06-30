@@ -91,13 +91,25 @@ Your delicious food is now being prepared.
 <strong>Payment Method</strong>
 
 </div>
-
 <div class="col-6 text-end">
 
-{{ order.payment_method }}
+{% if payment %}
+
+    {% if payment.payment_method == "COD" %}
+        <span class="payment-badge payment-cod">
+            Cash On Delivery
+        </span>
+    {% else %}
+        <span class="payment-badge payment-upi">
+            {{ payment.payment_method }}
+        </span>
+    {% endif %}
+
+{% else %}
+    N/A
+{% endif %}
 
 </div>
-
 </div>
 
 <hr>

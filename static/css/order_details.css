@@ -1,16 +1,16 @@
-/* ==========================
+/* ==========================================
    ORDER BANNER
-========================== */
+========================================== */
 
 .order-banner{
-    background: linear-gradient(135deg,#c1121f,#8b0000);
+    background:linear-gradient(135deg,#c1121f,#8b0000);
     color:#fff;
     text-align:center;
     padding:70px 0;
 }
 
 .order-banner h1{
-    font-size:40px;
+    font-size:42px;
     font-weight:700;
     margin-bottom:10px;
 }
@@ -20,32 +20,29 @@
     opacity:.9;
 }
 
-
-/* ==========================
-   ORDER DETAILS
-========================== */
+/* ==========================================
+   PAGE
+========================================== */
 
 .order-details{
-    background:#f8f9fa;
+    background:#f5f5f5;
     padding:60px 0;
 }
 
-
-/* ==========================
-   ORDER INFO CARD
-========================== */
+/* ==========================================
+   ORDER INFO
+========================================== */
 
 .order-info{
     background:#fff;
-    border-radius:15px;
+    border-radius:18px;
     padding:30px;
-    box-shadow:0 10px 25px rgba(0,0,0,.08);
-    margin-bottom:40px;
+    box-shadow:0 12px 30px rgba(0,0,0,.08);
 }
 
 .order-info h5{
+    color:#666;
     font-weight:600;
-    color:#555;
 }
 
 .order-info h3{
@@ -53,86 +50,346 @@
     font-weight:700;
 }
 
-
-/* ==========================
+/* ==========================================
    STATUS
-========================== */
+========================================== */
 
-.status{
-    display:inline-block;
-    padding:8px 20px;
+.badge{
+    padding:10px 20px;
     border-radius:30px;
-    background:#28a745;
-    color:white;
+    font-size:14px;
     font-weight:600;
 }
 
+.bg-warning{
+    background:#ffc107!important;
+    color:#111!important;
+}
 
-/* ==========================
+/* ==========================================
+   TRACKING CARD
+========================================== */
+
+.tracking-card{
+
+    background:#fff;
+
+    border-radius:18px;
+
+    margin-top:40px;
+
+    padding:40px;
+
+    box-shadow:0 12px 30px rgba(0,0,0,.08);
+
+}
+
+.tracking-card h3{
+
+    text-align:center;
+
+    font-weight:700;
+
+    color:#222;
+
+    margin-bottom:45px;
+
+}
+
+/* ==========================================
+   TIMELINE
+========================================== */
+
+.timeline{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:flex-start;
+
+    position:relative;
+
+}
+
+.timeline::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:7%;
+
+    right:7%;
+
+    top:26px;
+
+    height:5px;
+
+    background:#dddddd;
+
+    border-radius:20px;
+
+    z-index:1;
+
+}
+
+/* ==========================================
+   STEP
+========================================== */
+
+.timeline-step{
+
+    flex:1;
+
+    position:relative;
+
+    text-align:center;
+
+    z-index:2;
+
+}
+
+.timeline-step .circle{
+
+    width:55px;
+
+    height:55px;
+
+    margin:auto;
+
+    border-radius:50%;
+
+    background:#d5d5d5;
+
+    color:#666;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:22px;
+
+    font-weight:bold;
+
+    border:5px solid #fff;
+
+    transition:.35s;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.15);
+
+}
+
+.timeline-step.active .circle{
+
+    background:#28a745;
+
+    color:#fff;
+
+    transform:scale(1.08);
+
+    box-shadow:0 0 25px rgba(40,167,69,.4);
+
+}
+
+.timeline-step .label{
+
+    margin-top:16px;
+
+    font-size:14px;
+
+    color:#666;
+
+    line-height:1.6;
+
+}
+
+.timeline-step .label strong{
+
+    display:block;
+
+    color:#222;
+
+    margin-bottom:5px;
+
+}
+
+.timeline-step.active .label{
+
+    color:#28a745;
+
+}
+
+.timeline-step.active .label strong{
+
+    color:#28a745;
+
+}
+
+/* ==========================================
    PRODUCT CARD
-========================== */
+========================================== */
 
 .product-row{
+
     background:#fff;
-    padding:20px;
-    margin-bottom:20px;
-    border-radius:15px;
-    box-shadow:0 8px 18px rgba(0,0,0,.08);
+
+    border-radius:18px;
+
+    padding:22px;
+
+    margin-bottom:22px;
+
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+
+    transition:.3s;
+
+}
+
+.product-row:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:0 15px 30px rgba(0,0,0,.12);
+
 }
 
 .product-image{
+
     width:120px;
+
     height:120px;
+
     object-fit:cover;
-    border-radius:12px;
+
+    border-radius:15px;
+
     border:1px solid #eee;
+
 }
 
 .product-row h5{
+
     font-weight:700;
-    margin-bottom:10px;
+
     color:#222;
+
+    margin-bottom:8px;
+
 }
 
 .product-row p{
+
     color:#666;
-    font-size:15px;
+
     margin-bottom:0;
+
 }
-
-
-/* ==========================
-   PRICE
-========================== */
 
 .product-row b{
+
     color:#c1121f;
+
     font-size:18px;
+
 }
 
-
-/* ==========================
+/* ==========================================
    BUTTON
-========================== */
+========================================== */
 
 .btn-danger{
-    border-radius:30px;
-    padding:12px 35px;
+
+    border-radius:40px;
+
+    padding:12px 40px;
+
+    font-weight:600;
+
+    transition:.3s;
+
 }
 
+.btn-danger:hover{
 
-/* ==========================
+    transform:translateY(-3px);
+
+    box-shadow:0 10px 25px rgba(193,18,31,.35);
+
+}
+
+/* ==========================================
    MOBILE
-========================== */
+========================================== */
+
+@media(max-width:992px){
+
+.timeline{
+
+    flex-direction:column;
+
+    gap:30px;
+
+}
+
+.timeline::before{
+
+    display:none;
+
+}
+
+.timeline-step{
+
+    display:flex;
+
+    align-items:center;
+
+    text-align:left;
+
+    gap:20px;
+
+}
+
+.timeline-step .circle{
+
+    margin:0;
+
+}
+
+.timeline-step .label{
+
+    margin-top:0;
+
+}
+
+}
 
 @media(max-width:768px){
 
-.product-row{
+.order-info{
+
     text-align:center;
+
+}
+
+.product-row{
+
+    text-align:center;
+
 }
 
 .product-image{
+
     margin-bottom:20px;
+
+}
+
+.tracking-card{
+
+    padding:25px;
+
 }
 
 }

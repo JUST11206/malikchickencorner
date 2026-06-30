@@ -1,0 +1,164 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}
+UPI Payment
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/payment.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<section class="container py-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-lg-6">
+
+            <div class="payment-card">
+
+                <h2>
+
+                    💳 Scan & Pay
+
+                </h2>
+
+                <p>
+
+                    Scan this QR Code using PhonePe, Google Pay, Paytm or any UPI App.
+
+                </p>
+
+                <h1 class="payment-amount">
+
+                    ₹{{ total }}
+
+                </h1>
+
+                <div id="qrcode"></div>
+
+                <div class="upi-box">
+
+                    <h5>
+
+                        UPI ID
+
+                    </h5>
+
+                    <p class="upi-id">
+
+                        7983813981@ybl
+
+                    </p>
+
+                </div>
+
+                <hr>
+
+                <form
+                action="{{ url_for('upload_payment') }}"
+                method="POST"
+                enctype="multipart/form-data">
+
+                    <input
+                    type="hidden"
+                    name="total"
+                    value="{{ total }}">
+
+                    <div class="upload-box">
+
+                        <label>
+
+                            📷 Upload Payment Screenshot
+
+                        </label>
+
+                        <input
+                        type="file"
+                        name="payment_image"
+                        class="form-control"
+                        accept="image/*"
+                        required>
+
+                    </div>
+
+                    <button
+                    type="submit"
+                    class="payment-btn">
+
+                        ✅ I've Paid
+
+                    </button>
+
+                </form>
+
+                <div class="payment-note">
+
+                    <h6>
+
+                        📌 Instructions
+
+                    </h6>
+
+                    <ul class="mb-0">
+
+                        <li>Open PhonePe, Google Pay or any UPI App.</li>
+
+                        <li>Scan the QR Code.</li>
+
+                        <li>Complete the payment of <strong>₹{{ total }}</strong>.</li>
+
+                        <li>Take a screenshot of successful payment.</li>
+
+                        <li>Upload the screenshot above.</li>
+
+                        <li>Click <strong>I've Paid</strong>.</li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<script>
+
+const amount = "{{ total }}";
+
+const upiID = "7983813981@ybl";
+
+const merchant = encodeURIComponent("Saif Malik");
+
+const note = encodeURIComponent("Order Payment");
+
+const upiLink =
+`upi://pay?pa=${upiID}&pn=${merchant}&am=${amount}&cu=INR&tn=${note}`;
+
+console.log(upiLink);
+
+document.getElementById("qrcode").innerHTML = "";
+
+new QRCode(document.getElementById("qrcode"),{
+
+    text: upiLink,
+
+    width:280,
+
+    height:280,
+
+    correctLevel:QRCode.CorrectLevel.H
+
+});
+
+</script>
+
+{% endblock %}

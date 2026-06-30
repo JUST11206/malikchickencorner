@@ -1,0 +1,239 @@
+/* ======================================
+   UPI PAYMENT PAGE
+====================================== */
+
+body{
+
+    background:#f5f7fb;
+
+}
+
+/* Card */
+
+.payment-card{
+
+    background:#ffffff;
+
+    border-radius:22px;
+
+    padding:40px;
+
+    box-shadow:0 15px 40px rgba(0,0,0,.08);
+
+}
+
+/* Heading */
+
+.payment-card h2{
+
+    font-weight:700;
+
+    color:#222;
+
+}
+
+.payment-card p{
+
+    color:#777;
+
+    margin-bottom:25px;
+
+}
+
+/* Amount */
+
+.payment-amount{
+
+    font-size:52px;
+
+    font-weight:700;
+
+    color:#dc2626;
+
+    margin-bottom:30px;
+
+}
+
+/* QR Code */
+
+#qrcode{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    margin:25px auto;
+
+    padding:18px;
+
+    width:max-content;
+
+    background:#fff;
+
+    border-radius:18px;
+
+    border:4px solid #dc2626;
+
+    box-shadow:0 10px 30px rgba(220,38,38,.15);
+
+}
+
+/* UPI */
+
+.upi-box{
+
+    background:#f8fafc;
+
+    border:2px dashed #dc2626;
+
+    border-radius:15px;
+
+    padding:18px;
+
+    margin-top:25px;
+
+}
+
+.upi-box h5{
+
+    font-weight:700;
+
+    margin-bottom:8px;
+
+}
+
+.upi-id{
+
+    color:#2563eb;
+
+    font-weight:700;
+
+    font-size:18px;
+
+    word-break:break-all;
+
+}
+
+/* Upload */
+
+.upload-box{
+
+    margin-top:30px;
+
+    text-align:left;
+
+}
+
+.upload-box label{
+
+    font-weight:600;
+
+    margin-bottom:8px;
+
+    display:block;
+
+}
+
+.upload-box input{
+
+    border-radius:12px;
+
+    padding:10px;
+
+}
+
+/* Button */
+
+.payment-btn{
+
+    margin-top:25px;
+
+    width:100%;
+
+    border:none;
+
+    border-radius:12px;
+
+    padding:15px;
+
+    font-size:18px;
+
+    font-weight:700;
+
+    background:#16a34a;
+
+    color:#fff;
+
+    transition:.3s;
+
+}
+
+.payment-btn:hover{
+
+    background:#15803d;
+
+    transform:translateY(-2px);
+
+}
+
+/* Instructions */
+
+.payment-note{
+
+    margin-top:30px;
+
+    background:#fff8e1;
+
+    border-left:5px solid #ffc107;
+
+    padding:15px 20px;
+
+    border-radius:12px;
+
+    color:#555;
+
+    text-align:left;
+
+}
+
+.payment-note h6{
+
+    font-weight:700;
+
+    margin-bottom:8px;
+
+}
+
+/* Responsive */
+
+@media(max-width:768px){
+
+.payment-card{
+
+    padding:25px;
+
+}
+
+.payment-amount{
+
+    font-size:40px;
+
+}
+
+#qrcode img{
+
+    width:220px !important;
+
+    height:220px !important;
+
+}
+
+.payment-btn{
+
+    font-size:16px;
+
+}
+
+}

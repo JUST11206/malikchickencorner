@@ -35,11 +35,7 @@ href="{{ url_for('static', filename='css/admin_order_details.css') }}">
 
 <h5>Customer</h5>
 
-<p>
-
-{{ order.user.fullname }}
-
-</p>
+<p>{{ order.user.fullname }}</p>
 
 </div>
 
@@ -47,11 +43,7 @@ href="{{ url_for('static', filename='css/admin_order_details.css') }}">
 
 <h5>Order Date</h5>
 
-<p>
-
-{{ order.created_at.strftime('%d %B %Y') }}
-
-</p>
+<p>{{ order.created_at.strftime('%d %B %Y') }}</p>
 
 </div>
 
@@ -71,17 +63,117 @@ href="{{ url_for('static', filename='css/admin_order_details.css') }}">
 
 <h5>Total</h5>
 
-<h3>
-
-₹{{ order.total_amount }}
-
-</h3>
+<h3>₹{{ order.total_amount }}</h3>
 
 </div>
 
 </div>
 
 </div>
+
+{% if payment %}
+
+<div class="card shadow mt-5">
+
+<div class="card-header bg-dark text-white">
+
+<h4 class="mb-0">
+
+💳 Payment Details
+
+</h4>
+
+</div>
+
+<div class="card-body">
+
+<div class="row">
+
+<div class="col-md-4">
+
+<strong>Method</strong>
+
+<p>{{ payment.payment_method }}</p>
+
+</div>
+
+<div class="col-md-4">
+
+<strong>Status</strong>
+
+<p>
+
+<span class="badge bg-warning text-dark">
+
+{{ payment.payment_status }}
+
+</span>
+
+</p>
+
+</div>
+
+<div class="col-md-4">
+
+<strong>Screenshot</strong>
+
+<br>
+
+{% if payment.transaction_id %}
+
+<a
+href="{{ url_for('static', filename=payment.transaction_id) }}"
+target="_blank"
+class="btn btn-primary btn-sm">
+
+Open Screenshot
+
+</a>
+
+{% else %}
+
+<span class="text-danger">
+
+No Screenshot
+
+</span>
+
+{% endif %}
+
+</div>
+
+</div>
+
+{% if payment.transaction_id %}
+
+<div class="text-center mt-4">
+
+<img
+src="{{ url_for('static', filename=payment.transaction_id) }}"
+class="img-fluid rounded shadow"
+style="max-width:450px;">
+
+</div>
+
+{% endif %}
+
+<div class="text-center mt-4">
+
+<a
+href="{{ url_for('approve_payment', payment_id=payment.id) }}"
+class="btn btn-success">
+
+✅ Approve Payment
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+{% endif %}
 
 <h2 class="mt-5 mb-4">
 
@@ -105,17 +197,9 @@ class="product-image">
 
 <div class="col-md-4">
 
-<h5>
+<h5>{{ item.product.name }}</h5>
 
-{{ item.product.name }}
-
-</h5>
-
-<p>
-
-{{ item.product.description }}
-
-</p>
+<p>{{ item.product.description }}</p>
 
 </div>
 
@@ -125,11 +209,7 @@ Quantity
 
 <br>
 
-<b>
-
-{{ item.quantity }}
-
-</b>
+<b>{{ item.quantity }}</b>
 
 </div>
 
@@ -139,11 +219,7 @@ Price
 
 <br>
 
-<b>
-
-₹{{ item.price }}
-
-</b>
+<b>₹{{ item.price }}</b>
 
 </div>
 
@@ -153,11 +229,7 @@ Total
 
 <br>
 
-<b>
-
-₹{{ item.price * item.quantity }}
-
-</b>
+<b>₹{{ item.price * item.quantity }}</b>
 
 </div>
 

@@ -24,6 +24,11 @@ from models import Cart, Product
 from models import Wishlist
 from sqlalchemy import func
 from models import User, Order, Wishlist, Cart
+import requests
+from whatsapp import send_owner_notification
+from flask import jsonify
+from datetime import datetime
+from zoneinfo import ZoneInfo
 
 
 app = Flask(__name__)
@@ -435,10 +440,6 @@ def product_detail(product_id):
         related_products=related_products
     )
 
-#Search item
-@app.route("/search")
-def search():
-    return "<h2>Search Feature Coming Soon</h2>"
 
 
 # ==========================
@@ -473,33 +474,32 @@ def cart():
     )
 
 
-
-#cart-add
+# Add to Cart
 @app.route("/add-to-cart/<int:product_id>")
 def add_to_cart(product_id):
 
-    # Check Login
     if "user_id" not in session:
         return redirect("/login")
 
     user_id = session["user_id"]
 
-    # Product already exists?
+    qty = int(request.args.get("qty", 1))
+
     cart_item = Cart.query.filter_by(
         user_id=user_id,
         product_id=product_id
     ).first()
 
     if cart_item:
-        cart_item.quantity += 1
-
+        cart_item.quantity += qty
     else:
-        cart_item = Cart(
-            user_id=user_id,
-            product_id=product_id,
-            quantity=1
+        db.session.add(
+            Cart(
+                user_id=user_id,
+                product_id=product_id,
+                quantity=qty
+            )
         )
-        db.session.add(cart_item)
 
     db.session.commit()
 
@@ -516,6 +516,7 @@ def remove_cart(id):
     db.session.commit()
 
     return redirect("/cart")
+
 
 #Increase Quantity
 @app.route("/increase-cart/<int:id>")
@@ -546,8 +547,8 @@ def decrease_cart(id):
     return redirect("/cart")
 
 
-#Checkout Page
 
+# Checkout Page
 @app.route("/checkout")
 def checkout():
 
@@ -556,18 +557,47 @@ def checkout():
 
     user_id = session["user_id"]
 
-    cart_items = Cart.query.filter_by(user_id=user_id).all()
+    cart_items = []
 
-    for item in cart_items:
-        item.product = Product.query.get(item.product_id)
+    # ----------------------------
+    # BUY NOW
+    # ----------------------------
+    if "buy_now_product" in session:
 
-    total = sum(item.product.price * item.quantity for item in cart_items)
+        product = Product.query.get_or_404(session["buy_now_product"])
+
+        class BuyNowItem:
+            pass
+
+        item = BuyNowItem()
+        item.product = product
+        qty = session.get("buy_now_qty", 1)
+
+        item.quantity = qty
+        cart_items.append(item)
+        subtotal = product.price * qty
+        delivery_charge = 50
+        discount = 60
+        total = subtotal + delivery_charge - discount
+                
+    # ----------------------------
+    # NORMAL CART
+    # ----------------------------
+    else:
+
+        cart_items = Cart.query.filter_by(user_id=user_id).all()
+
+        for item in cart_items:
+            item.product = Product.query.get(item.product_id)
+
+        total = sum(item.product.price * item.quantity for item in cart_items)
 
     return render_template(
         "checkout/checkout.html",
         cart_items=cart_items,
         total=total
     )
+
 
 #Order Success route
 @app.route("/order-success/<int:order_id>")
@@ -578,11 +608,15 @@ def order_success(order_id):
 
     order = Order.query.get_or_404(order_id)
 
+    payment = Payment.query.filter_by(
+        order_id=order.id
+    ).first()
+
     return render_template(
         "order/order_success.html",
-        order=order
+        order=order,
+        payment=payment
     )
-
 
 # ==========================
 # Wishlist
@@ -665,6 +699,7 @@ def my_orders():
     )
 
 #Order Details Page 
+
 @app.route("/order/<int:order_id>")
 def order_details(order_id):
 
@@ -694,16 +729,56 @@ def order_details(order_id):
         else:
             print("Product Not Found")
 
+    timeline = (
+        OrderTimeline.query
+        .filter_by(order_id=order.id)
+        .order_by(OrderTimeline.created_at.asc())
+        .all()
+    )
+    # Convert UTC -> IST
+    if order.created_at:
+        order.created_at = order.created_at.replace(tzinfo=ZoneInfo("UTC")).astimezone(ZoneInfo("Asia/Kolkata"))
+
+    if order.confirmed_at:
+        order.confirmed_at = order.confirmed_at.replace(tzinfo=ZoneInfo("UTC")).astimezone(ZoneInfo("Asia/Kolkata"))
+
+    if order.preparing_at:
+        order.preparing_at = order.preparing_at.replace(tzinfo=ZoneInfo("UTC")).astimezone(ZoneInfo("Asia/Kolkata"))
+
+    if order.out_for_delivery_at:
+        order.out_for_delivery_at = order.out_for_delivery_at.replace(tzinfo=ZoneInfo("UTC")).astimezone(ZoneInfo("Asia/Kolkata"))
+
+    if order.delivered_at:
+        order.delivered_at = order.delivered_at.replace(tzinfo=ZoneInfo("UTC")).astimezone(ZoneInfo("Asia/Kolkata"))
+
+    if order.cancelled_at:
+        order.cancelled_at = order.cancelled_at.replace(tzinfo=ZoneInfo("UTC")).astimezone(ZoneInfo("Asia/Kolkata"))
+
     return render_template(
         "orders/order_details.html",
         order=order,
-        items=items
+        items=items,
+        timeline=timeline
     )
+
+
+#Buy now route direct
+@app.route("/buy-now/<int:product_id>")
+def buy_now(product_id):
+
+    if "user_id" not in session:
+        return redirect("/login")
+
+    qty = int(request.args.get("qty", 1))
+
+    session["buy_now_product"] = product_id
+    session["buy_now_qty"] = qty
+
+    return redirect("/checkout")
 # ==========================
 # Place Order
 # ==========================
-
-@app.route("/place-order" , methods =["POST"])
+@app.route("/place-order", methods=["GET", "POST"])
 def place_order():
 
     if "user_id" not in session:
@@ -711,23 +786,62 @@ def place_order():
 
     user_id = session["user_id"]
 
-    cart_items = Cart.query.filter_by(
-        user_id=user_id
-    ).all()
+    cart_items = []
 
-    if not cart_items:
-        flash("Your cart is empty!")
-        return redirect("/cart")
+    # ============================
+    # BUY NOW
+    # ============================
 
-    total = 0
+    if "buy_now_product" in session:
 
-    for item in cart_items:
+        product = Product.query.get_or_404(
+            session["buy_now_product"]
+        )
 
-        product = Product.query.get(item.product_id)
+        class BuyNowItem:
+            pass
 
-        total += float(product.price) * item.quantity
+        item = BuyNowItem()
+        item.product = product
+        item.quantity = session.get("buy_now_qty", 1)
 
-    # Create Order
+        cart_items.append(item)
+
+    # ============================
+    # NORMAL CART
+    # ============================
+
+    else:
+
+        cart_items = Cart.query.filter_by(
+            user_id=user_id
+        ).all()
+
+        if not cart_items:
+            flash("Your cart is empty!")
+            return redirect("/cart")
+
+        for item in cart_items:
+            item.product = Product.query.get(item.product_id)
+
+    # ============================
+    # CALCULATE TOTAL
+    # ============================
+
+    subtotal = sum(
+        float(item.product.price) * item.quantity
+        for item in cart_items
+    )
+
+    delivery_charge = 50
+    discount = 60
+
+    total = subtotal + delivery_charge - discount
+
+    # ============================
+    # CREATE ORDER
+    # ============================
+
     order = Order(
         user_id=user_id,
         total_amount=total,
@@ -737,30 +851,110 @@ def place_order():
     db.session.add(order)
     db.session.commit()
 
-    # Save Order Items
-    for item in cart_items:
+    # ============================
+    # CREATE PAYMENT
+    # ============================
 
-        product = Product.query.get(item.product_id)
+    payment = Payment(
+        order_id=order.id,
+        amount=total,
+        payment_method="UPI" if session.get("payment_done") else "COD",
+        payment_status="Pending Verification" if session.get("payment_done") else "Pending",
+        transaction_id=session.get("payment_screenshot")
+    )
+
+    db.session.add(payment)
+    db.session.commit()
+
+    # ============================
+    # SAVE ORDER ITEMS
+    # ============================
+
+    for item in cart_items:
 
         order_item = OrderItem(
             order_id=order.id,
-            product_id=product.id,
+            product_id=item.product.id,
             quantity=item.quantity,
-            price=product.price
+            price=item.product.price
         )
 
         db.session.add(order_item)
 
-    # Clear Cart
-    Cart.query.filter_by(
-        user_id=user_id
-    ).delete()
+    db.session.commit()
+
+    # ============================
+    # SEND WHATSAPP NOTIFICATION
+    # ============================
+
+    try:
+
+        items_text = ""
+
+        for item in cart_items:
+            items_text += f"• {item.product.name} x {item.quantity}\n"
+
+        message = f"""
+🍗 NEW ORDER RECEIVED
+
+Order ID: MC{order.id}
+
+Customer: {session['fullname']}
+
+Items:
+{items_text}
+
+Subtotal: ₹{subtotal}
+Delivery: ₹{delivery_charge}
+Discount: ₹{discount}
+
+Total: ₹{total}
+
+Payment: {"UPI" if session.get("payment_done") else "COD"}
+
+Status: {order.status}
+"""
+
+        send_owner_notification(message)
+
+    except Exception as e:
+        print("WhatsApp Error:", e)
+
+    # ============================
+    # CLEAR BUY NOW / CART
+    # ============================
+
+    if "buy_now_product" in session:
+
+        session.pop("buy_now_product", None)
+        session.pop("buy_now_qty", None)
+
+    else:
+
+        Cart.query.filter_by(
+            user_id=user_id
+        ).delete()
 
     db.session.commit()
 
-    return redirect(url_for("order_success", order_id=order.id))
+    # ============================
+    # CLEAR PAYMENT SESSION
+    # ============================
 
+    session.pop("payment_done", None)
+    session.pop("payment_screenshot", None)
+    session.pop("checkout_data", None)
 
+    # ============================
+    # ORDER SUCCESS
+    # ============================
+
+    return redirect(
+        url_for(
+            "order_success",
+            order_id=order.id
+        )
+    )
 
 # ==========================
 # ADMIN ORDER 
@@ -794,16 +988,35 @@ def admin_order_details(order_id):
         order_id=order.id
     ).all()
 
+    items = OrderItem.query.filter_by(
+        order_id=order.id
+    ).all()
+
     for item in items:
         item.product = db.session.get(Product, item.product_id)
+
+    payment = Payment.query.filter_by(
+        order_id=order.id
+    ).first()
 
     return render_template(
         "admin/admin_order_details.html",
         order=order,
-        items=items
+        items=items,
+        payment=payment
+    )
+    
+    return render_template(
+        "admin/admin_order_details.html",
+        order=order,
+        items=items,
+        payment=payment
     )
 
 #Status Change
+
+from datetime import datetime
+
 @app.route("/admin/update-order/<int:order_id>/<status>")
 def update_order(order_id, status):
 
@@ -822,33 +1035,63 @@ def update_order(order_id, status):
     ]
 
     if status not in allowed_status:
-        flash("Invalid Status")
-        return redirect(url_for("admin_order_details", order_id=order.id))
+        flash("Invalid Order Status!", "danger")
+        return redirect(
+            url_for(
+                "admin_order_details",
+                order_id=order.id
+            )
+        )
 
+    # Update status
     order.status = status
+
+    # Current Time
+    current_time = datetime.utcnow()
+
+    # Save timeline only once
+    if status == "Confirmed" and not order.confirmed_at:
+        order.confirmed_at = current_time
+
+    elif status == "Preparing" and not order.preparing_at:
+        order.preparing_at = current_time
+
+    elif status == "Out For Delivery" and not order.out_for_delivery_at:
+        order.out_for_delivery_at = current_time
+
+    elif status == "Delivered" and not order.delivered_at:
+        order.delivered_at = current_time
+
+    elif status == "Cancelled" and not order.cancelled_at:
+        order.cancelled_at = current_time
 
     db.session.commit()
 
-    flash("Order Status Updated Successfully!")
+    flash("Order Status Updated Successfully!", "success")
 
-    return redirect(url_for("admin_order_details", order_id=order.id))
+    return redirect(
+        url_for(
+            "admin_order_details",
+            order_id=order.id
+        )
+    )
 
-#Status update 
-@app.route("/admin/update-order/<int:order_id>/<status>")
-def admin_update_order(order_id, status):
+# #Status update 
+# @app.route("/admin/update-order/<int:order_id>/<status>")
+# def admin_update_order(order_id, status):
 
-    if "admin_id" not in session:
-        return redirect("/admin/login")
+#     if "admin_id" not in session:
+#         return redirect("/admin/login")
 
-    order = Order.query.get_or_404(order_id)
+#     order = Order.query.get_or_404(order_id)
 
-    order.status = status
+#     order.status = status
 
-    db.session.commit()
+#     db.session.commit()
 
-    flash("Order Status Updated!")
+#     flash("Order Status Updated!")
 
-    return redirect("/admin/orders")
+#     return redirect("/admin/orders")
 
 
 # ==========================
@@ -984,6 +1227,165 @@ def inject_counts():
     return dict(
         cart_count=cart_count,
         wishlist_count=wishlist_count
+    )
+
+#ADmin/dash live-order
+@app.route("/admin/live-orders")
+def live_orders():
+
+    if "admin_id" not in session:
+        return jsonify([])
+
+    orders = (
+        Order.query
+        .order_by(Order.id.desc())
+        .limit(5)
+        .all()
+    )
+
+    result = []
+
+    for order in orders:
+
+        result.append({
+
+            "id": order.id,
+            "customer": order.user.fullname,
+            "amount": float(order.total_amount),
+            "status": order.status
+
+        })
+
+    return jsonify(result)
+
+# #Upi Payment
+# @app.route("/upi-payment")
+# def upi_payment():
+
+#     if "user_id" not in session:
+#         return redirect("/login")
+
+#     # Total amount from checkout
+#     amount = session.get("payment_amount", 0)
+
+#     return render_template(
+#         "payment/upi_payment.html",
+#         amount=amount
+#     )
+
+@app.route("/upi-payment", methods=["POST"])
+def upi_payment():
+
+    if "user_id" not in session:
+        return redirect("/login")
+
+    # Save checkout form temporarily
+    session["checkout_data"] = request.form.to_dict()
+
+    subtotal = float(request.form.get("subtotal", 0))
+
+    delivery = 50
+    discount = 60
+
+    total = subtotal + delivery - discount
+
+    session["payment_amount"] = total
+
+    return render_template(
+        "payment/upi_payment.html",
+        total=total
+    )
+
+#New @app.context_processor
+def inject_counts():
+
+    cart_count = 0
+    wishlist_count = 0
+
+    if "user_id" in session:
+        try:
+            cart_count = Cart.query.filter_by(
+                user_id=session["user_id"]
+            ).count()
+
+            wishlist_count = Wishlist.query.filter_by(
+                user_id=session["user_id"]
+            ).count()
+
+        except Exception:
+            db.session.rollback()
+
+    return dict(
+        cart_count=cart_count,
+        wishlist_count=wishlist_count
+    )
+
+#Upload Payment 
+@app.route("/upload-payment", methods=["POST"])
+def upload_payment():
+
+    if "user_id" not in session:
+        return redirect("/login")
+
+    image = request.files.get("payment_image")
+
+    if not image:
+        flash("Please upload payment screenshot.")
+        return redirect("/upi-payment")
+
+    # Create upload folder
+    upload_folder = os.path.join(
+        app.static_folder,
+        "uploads",
+        "payments"
+    )
+
+    os.makedirs(upload_folder, exist_ok=True)
+
+    # Save image
+    filename = secure_filename(image.filename)
+
+    image.save(
+        os.path.join(upload_folder, filename)
+    )
+
+    # Save screenshot path in session
+    session["payment_screenshot"] = (
+        "uploads/payments/" + filename
+    )
+
+    # Continue to place order
+    session["payment_done"] = True
+    return place_order()
+
+# ==========================
+# APPROVE PAYMENT (ADMIN)
+# ==========================
+
+@app.route("/admin/payment/<int:payment_id>/approve")
+def approve_payment(payment_id):
+
+    if "admin_id" not in session:
+        return redirect("/admin/login")
+
+    payment = Payment.query.get_or_404(payment_id)
+
+    payment.payment_status = "Verified"
+
+    order = Order.query.get(payment.order_id)
+
+    if order:
+        order.status = "Confirmed"
+
+    db.session.commit()
+
+    flash("Payment Approved Successfully!")
+
+    return redirect(
+        url_for(
+            "admin_order_details",
+            order_id=payment.order_id
+        )
     )
 
 # ==========================

@@ -111,9 +111,15 @@ Admin Dashboard
 <hr class="my-5">
 
 <h3 class="mb-4">
+🔔 Live New Orders
+</h3>
 
+<div id="liveOrders"></div>
+
+<hr class="my-5">
+
+<h3 class="mb-4">
 Recent Orders
-
 </h3>
 
 <div class="table-responsive">
@@ -204,6 +210,71 @@ View
 </div>
 
 </section>
+<script>
+
+function loadOrders(){
+
+    fetch("/admin/live-orders")
+
+    .then(res => res.json())
+
+    .then(data => {
+
+        let html = "";
+
+        data.forEach(order=>{
+
+            html += `
+
+            <div class="live-order-card">
+
+                <div>
+
+                    <h5>
+
+                        🔔 Order #${order.id}
+
+                    </h5>
+
+                    <p>
+
+                        Customer :
+                        <strong>${order.customer}</strong>
+
+                        <br>
+
+                        Amount :
+                        ₹${order.amount}
+
+                    </p>
+
+                </div>
+
+                <a
+                href="/admin/order/${order.id}"
+                class="btn btn-danger">
+
+                View
+
+                </a>
+
+            </div>
+
+            `;
+
+        });
+
+        document.getElementById("liveOrders").innerHTML = html;
+
+    });
+
+}
+
+loadOrders();
+
+setInterval(loadOrders,5000);
+
+</script>
 
 {% endblock %}
 
